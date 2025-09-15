@@ -50,6 +50,12 @@ public:
     void setNickName(const std::string &nickName);
     void setPhoneNumber(const std::string &phoneNumber);
     void setDarkestSecret(const std::string &darkestSecret);
+
+    /**
+     * @brief Checks if all fields are populated.
+     * @return true if all fields have values, false otherwise.
+     */
+    bool hasValue(void) const;
 };
 
 #endif

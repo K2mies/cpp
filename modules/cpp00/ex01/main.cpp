@@ -7,7 +7,7 @@
 
 void    menuPrompt(bool &firstTime)
 {
-    std::cout << "\nPhoneBook Menu:\n"
+    std::cout << "\nPhoneBook Menu:\n";
     if (firstTime)
     {
         std::cout << "welcome to your PhoneBook!\n";
@@ -19,6 +19,8 @@ void    menuPrompt(bool &firstTime)
 
 int main()
 {
+    PhoneBook pBook;
+    std::string value;
     bool firstTime = true;
     while (true)
     {
@@ -29,8 +31,23 @@ int main()
 
         if (value == CMD_ADD || value == "ADD")
         {
-            
+            std::cout << "\nADDING CONTACT...\n";
+            pBook.addContact();
+        }
+        else if (value == CMD_SEARCH || value == "SEARCH")
+        {
+            std::cout << "\nSEARCHING CONTACT...\n";
+            pBook.searchContact();
+        }
+        else if (value == CMD_EXIT || value == "EXIT")
+        {
+            std::cout << "\nEXITING PROGRAM...\n";
+            break;
+        }
+        else
+        {
+            std::cout << "\ninvalid command. please try again\n";
         }
     }
-    ruturn (0);
+    return (0);
 }

@@ -23,7 +23,7 @@ const std::string Contact::getFirstName(void) const
 {
     return (this->_firstName);
 }
-const std::string Contact::getLirstName(void) const
+const std::string Contact::getLastName(void) const
 {
     return (this->_lastName);
 }
@@ -55,11 +55,24 @@ void Contact::setNickName(const std::string &nickName)
 {
     this->_nickName = nickName;
 }
-void Constant::setPhoneNumber(const std::string &phoneNumber)
+void Contact::setPhoneNumber(const std::string &phoneNumber)
 {
-    this->_phoneNumber;
+    this->_phoneNumber = phoneNumber;
 }
-void Constant::setDarkestSecret(const std::string &darkestSecret)
+void Contact::setDarkestSecret(const std::string &darkestSecret)
 {
-    this->_darkestsecret = darkestSecret;
+    this->_darkestSecret = darkestSecret;
+}
+
+/**
+ * @brief Check if all fields of the Contact are filled.
+ * @return true if all fields have values, false otherwise.
+ */
+bool    Contact::hasValue(void) const
+{
+    return !(this->_firstName.empty()   ||
+             this->_lastName.empty()    ||
+             this->_nickName.empty()    ||
+             this->_phoneNumber.empty() ||
+             this->_darkestSecret.empty());
 }
