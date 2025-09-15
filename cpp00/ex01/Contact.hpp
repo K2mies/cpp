@@ -1,0 +1,55 @@
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
+
+#include <string>
+
+/**
+ * @brief   creates a contact object in the phone book
+ */
+class   Contact
+{
+private:
+
+    std::string _firstName;
+    std::string _lastName;
+    std::string _nickName;
+    std::string _phoneNumber;
+    std::string _darkestSecret;
+
+public:
+    /**
+     * @brief Constructor
+     */
+    Contact(void);
+
+    /**
+     * @brief Destructor
+     */
+    ~Contact(void);
+
+    /**
+     * @brief Getters
+     */
+    //in this case the first const ensures that the &reference 
+    //that is returned is read only so that the original is not
+    //changed
+
+    //the second const garuntees that the function itself is read only
+    //and does not change any member variables
+    const std::string   getFirstName(void) const;
+    const std::string   getLastName(void) const;
+    const std::string   getNickName(void) const;
+    const std::string   getPhoneNumber(void) const;
+    const std::string   getDarkestSecret(void) const;
+
+    /**
+     * @brief Setters
+     */
+    void setFirstName(const std::string &firstName);
+    void setLastName(const std::string &lastName);
+    void setNickName(const std::string &nickName);
+    void setPhoneNumber(const std::string &phoneNumber);
+    void setDarkestSecret(const std::string &darkestSecret);
+};
+
+#endif
