@@ -16,12 +16,12 @@ PhoneBook::~PhoneBook(void)
  */
 void    PhoneBook::addContact(void)
 {
-    indexHandler();
-    handleInput("First Name: ",     &Contact::setFirstName, false);
-    handleInput("Last Name: ",      &Contact::setLastName, false);
-    handleInput("Nick Name: ",      &Contact::setNickName, false);
-    handleInput("Phone Number: ",   &Contact::setPhoneNumber, true);
-    handleInput("Darkest Secret: ", &Contact::setDarkestSecret, false);
+   _indexHandler();
+   _handleInput("First Name: ",     &Contact::setFirstName,     false);
+   _handleInput("Last Name: ",      &Contact::setLastName,      false);
+   _handleInput("Nick Name: ",      &Contact::setNickName,      false);
+   _handleInput("Phone Number: ",   &Contact::setPhoneNumber,   true);
+   _handleInput("Darkest Secret: ", &Contact::setDarkestSecret, false);
 }
 /**
  * @brief searches phonebook for a contact
@@ -33,8 +33,8 @@ void    PhoneBook::searchContact(void)
         std::cout << "PhoneBook is empty.\n";
         return;
     }
-    displayAllContact();
-    handleDetailContact();
+    _displayAllContact();
+    _handleDetailContact();
 }
 
 
@@ -47,7 +47,7 @@ void    PhoneBook::searchContact(void)
 *that if the index goes past the last element, it automatically loops back to 
 *the beginning, preventing it from going out of bounds.
 */
-void    PhoneBook::indexHandler(void)
+void    PhoneBook::_indexHandler(void)
 {
     _index = (_index + 1) % 8;
 }
@@ -55,7 +55,7 @@ void    PhoneBook::indexHandler(void)
 /**
  * @brief truncates the string if over 10 characters
  */
-void    PhoneBook::truncate(std::string str) const
+void    PhoneBook::_truncate(std::string str) const
 {
     if (str.length() > 10)
     {
@@ -69,7 +69,7 @@ void    PhoneBook::truncate(std::string str) const
  * @brief displays all contacts
  * if any of the contacts do not have a value it will exit the loop
  */
-void    PhoneBook::displayAllContact(void) const
+void    PhoneBook::_displayAllContact(void) const
 {
     std::cout << "     Index|First Name| Last Name|  Nickname\n";
     for (int i = 0; i < 8; i++)
@@ -79,27 +79,27 @@ void    PhoneBook::displayAllContact(void) const
             break;
         }
         std::cout << std::setw(10) << i << "|";
-        truncate(_contactList[i].getFirstName());
-        truncate(_contactList[i].getLastName());
-        truncate(_contactList[i].getNickName());
-         std::cout << "\n";
+        _truncate(_contactList[i].getFirstName());
+        _truncate(_contactList[i].getLastName());
+        _truncate(_contactList[i].getNickName());
+        std::cout << "\n";
     }
 }
 
 /**
  * @brief displays single contact
  */
-void    PhoneBook::displaySingleContact(std::string input) const
+void    PhoneBook::_displaySingleContact(std::string input) const
 {
     //checks if the input is a valid digit.
     if (input.length() == 1 && std::isdigit(input[0]))
     {
         int index = input[0] - '0';
-        std::cout << "First Name: " << _contactList[index].getFirstName() << "\n";
-        std::cout << "Last Name: " << _contactList[index].getLastName() << "\n";
-        std::cout << "Nick Name: " << _contactList[index].getNickName() << "\n";
-        std::cout << "Phone Number: " << _contactList[index].getPhoneNumber() << "\n";
-        std::cout << "Darkest Secret: " << _contactList[index].getDarkestSecret() << "\n";
+        std::cout << "First Name: "     << _contactList[index].getFirstName()       << "\n";
+        std::cout << "Last Name: "      << _contactList[index].getLastName()        << "\n";
+        std::cout << "Nick Name: "      << _contactList[index].getNickName()        << "\n";
+        std::cout << "Phone Number: "   << _contactList[index].getPhoneNumber()     << "\n";
+        std::cout << "Darkest Secret: " << _contactList[index].getDarkestSecret()   << "\n";
     }
     else
     {
@@ -110,22 +110,22 @@ void    PhoneBook::displaySingleContact(std::string input) const
 /**
  * @gets the indexed contact
  */
-void    PhoneBook::handleDetailContact(void)
+void    PhoneBook::_handleDetailContact(void)
 {
     std::string input;
     std::cout << "Index: ";
     std::getline(std::cin, input);
-    if (!isValidIndexDetail(input))
+    if (!_isValidIndexDetail(input))
     {
-        handleDetailContact();
+        _handleDetailContact();
     }
     else
     {
-        displaySingleContact(input);
+        _displaySingleContact(input);
     }
 }
 
-bool    PhoneBook::isValidIndexDetail(const std::string &input) const
+bool    PhoneBook::_isValidIndexDetail(const std::string &input) const
 {
     if (input.length() != 1 || !std::isdigit(input[0]))
     {
@@ -144,7 +144,7 @@ bool    PhoneBook::isValidIndexDetail(const std::string &input) const
 /**
  * @checks wether or not input is valid
  */
-bool    PhoneBook::validInput(const std::string &input, const std::string &allowedChars, size_t minLength) const
+bool    PhoneBook::_validInput(const std::string &input, const std::string &allowedChars, size_t minLength) const
 {
     if (input.length() < minLength)
     {
@@ -166,12 +166,12 @@ bool    PhoneBook::validInput(const std::string &input, const std::string &allow
 /**
  * @checks wether or not field is valid
  */
-bool    PhoneBook::isValidField(const std::string &input, bool justNumber) const
+bool    PhoneBook::_isValidField(const std::string &input, bool justNumber) const
 {
-    return (validInput(input, justNumber ? "0123456789" : "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ", 1));
+    return (_validInput(input, justNumber ? "0123456789" : "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ", 1));
 }
 
-void    PhoneBook::handleInput(const std::string &prompt, void (Contact::*setter)(const std::string &), bool justNumber)
+void    PhoneBook::_handleInput(const std::string &prompt, void (Contact::*setter)(const std::string &), bool justNumber)
 {
     std::string input;
 
@@ -181,7 +181,7 @@ void    PhoneBook::handleInput(const std::string &prompt, void (Contact::*setter
         std::cout << prompt;
         std::getline(std::cin, input);
 
-        if (isValidField(input, justNumber))
+        if (_isValidField(input, justNumber))
         {
             //Validate input, set the value ifvalid, exit loop on valid input.
             (_contactList[_index].*setter)(input);

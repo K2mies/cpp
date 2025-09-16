@@ -36,20 +36,20 @@ public:
 
     //the second const garuntees that the function itself is read only
     //and does not change any member variables
-    const std::string   getFirstName(void) const;
-    const std::string   getLastName(void) const;
-    const std::string   getNickName(void) const;
-    const std::string   getPhoneNumber(void) const;
-    const std::string   getDarkestSecret(void) const;
+    const std::string   getFirstName(void)      const;
+    const std::string   getLastName(void)       const;
+    const std::string   getNickName(void)       const;
+    const std::string   getPhoneNumber(void)    const;
+    const std::string   getDarkestSecret(void)  const;
 
     /**
      * @brief Setters
      */
-    void setFirstName(const std::string &firstName);
-    void setLastName(const std::string &lastName);
-    void setNickName(const std::string &nickName);
-    void setPhoneNumber(const std::string &phoneNumber);
-    void setDarkestSecret(const std::string &darkestSecret);
+    void setFirstName       (const std::string &firstName);
+    void setLastName        (const std::string &lastName);
+    void setNickName        (const std::string &nickName);
+    void setPhoneNumber     (const std::string &phoneNumber);
+    void setDarkestSecret   (const std::string &darkestSecret);
 
     /**
      * @brief Checks if all fields are populated.
