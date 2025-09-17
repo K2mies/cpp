@@ -12,7 +12,7 @@ int	main(int argc, char **argv)
 	   		std::string str = argv[i];
 			for (char &letter : str)
 				letter = std::toupper(letter);
-			std::cout << str << " ";
+			std::cout << str;
 		}
 		std::cout << std::endl;
 	}

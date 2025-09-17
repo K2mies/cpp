@@ -34,6 +34,4 @@ public:
     void    addContact(void);
     void    searchContact(void);
 };
-
-
 #endif
