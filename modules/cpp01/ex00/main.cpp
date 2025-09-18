@@ -1,9 +1,5 @@
 #include "Zombie.hpp"
 
-// function declaration
-void	randomChump(std::string name);
-Zombie	*newZombie(std::string name);
-
 int	main(void)
 {
 	std::cout << std::endl;

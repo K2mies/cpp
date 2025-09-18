@@ -7,15 +7,16 @@
 class	Zombie
 {
 public:
+    Zombie();
 	Zombie(std::string name);
-	~Zombie(void);
+	~Zombie();
+    void    setName(std::string name);
 	void	announce(void);
 private:
 	std::string _name;
 
 };
 
-//non member functions
-void    randomChump(std::string name);
-Zombie  *newZombie(std::string name);
+//non member/class functions
+Zombie  *zombieHorde(int N, std::string name);
 #endif
