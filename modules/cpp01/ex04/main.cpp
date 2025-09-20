@@ -1,4 +1,5 @@
 #include <iostream>
+#include "File.hpp"
 
 int	main()
 {
@@ -13,5 +14,11 @@ int	main()
 	std::cout << "> enter replacement string: ";
 	std::cin >> s2;
 
-	std::cout << filename << " " << s1 << " " << s2 << " " << std::endl;
+    File    in_file(filename, std::ios::in);
+    in_file.readFromFile();
+    in_file.replace(s1, s2);
+    in_file.writeToFile(filename + ".replace");
+
+    
+
 }
