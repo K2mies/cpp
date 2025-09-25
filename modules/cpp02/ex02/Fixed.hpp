@@ -13,20 +13,20 @@ private:
 	static const int _bits = 8;
 public:
 // CONSTRUCTION========================================================*
-	// default constructor
+	// Default Constructor=============================================*
 		Fixed(void);
-	// takes const int as parameter
+	// Takes Const int as parameter====================================*
 		Fixed(const int raw);
-	// takes const  float as a parameter
+	// Takes Const float as parameter==================================*
 		Fixed(const float raw);
 // COPYING=============================================================*
-	// taking the getBits and copying it into a new instance
+	// Taking the getBits and copying it into a new instance===========*
 		Fixed(Fixed const &src);
 // DESTRUCTION=========================================================*
-	// Destructor
+	// Destructor======================================================*
 		~Fixed();
 // OPERATOR OVERLOADING================================================*
-	// assignment - operator overload where we say how does '=' work
+	// assignment - operator overload where we say how does '=' work===*
 		Fixed &operator=(Fixed const &rhs);
 // COMPARASON OPERATORS================================================*
 		bool operator	>	(const Fixed &rh)	const;
@@ -46,19 +46,19 @@ public:
 		Fixed operator	++(int);			// postfix
 		Fixed operator	--(int);			// postfix
 // MEMBER FUNCTIONS====================================================*
-	// GETTERS/SETTERS=================================================*
-	//GET
-		int		getRawBits(void) const;
-	//SET
-		void	setRawBits(int const raw);
-	// CONVERSION======================================================*
-		float	toFloat(void)	const;
-		int		toInt(void)		const;
 	// STATIC MIN/MAX==================================================*
 		static	Fixed &min(Fixed &a, Fixed &b);
 		static	Fixed &max(Fixed &a, Fixed &b);
 		static	Fixed const &min(Fixed const &a, Fixed const &b);
 		static	Fixed const &max(Fixed const &a, Fixed const &b);
+	// GETTERS/SETTERS=================================================*
+	// GET=============================================================*
+		int		getRawBits(void) const;
+	// SET=============================================================*
+		void	setRawBits(int const raw);
+	// CONVERSION======================================================*
+		float	toFloat(void)	const;
+		int		toInt(void)		const;
 };
 
 // OUTPUT OPERATOR OVERLOAD============================================*
