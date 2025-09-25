@@ -31,11 +31,72 @@ class Fixed
 		}
 	private:
 		static constexpr Fixed form(T v) {Fixed k; k.value = v; return k;}
+	public:
+		//Assign
+		constexpr Fixed &operator = (const Fixed &f) = default;
 
+		// Negate Unary
+		constexpr Fixed operator - () const
+		{
+			return (form(-this->value));
+		}
+		
+		//Addition
+		constexpr	Fixed operator + (const Fixed &f) const
+		{
+			return (form(this->value + f.value));
+		}
+		// Plus equals
+		constexpr Fixed &operator += (const Fixed &f)
+		{
+			this->value += f.value; return (*this);
+
+		}
+		//Subtraction
+		constexpr	Fixed operator - (const Fixed &f) const
+		{
+			return (form(this->value - f.value));
+		}
+		// Minus equals
+		constexpr Fixed &operator -= (const Fixed &f)
+		{
+			this->value -= f.value; return (*this);
+		}
+		
+		//Multiplacation
+		constexpr Fixed operator * (const Fixed &f) const
+		{
+			return (form(T2(this->value) * T2(f.value)) >> dp);
+		}
+		//Times equals
+		constexpr Fixed &operator *= (const Fixed &f)
+		{
+			this->value = (T2(this->value) * T2(f.value)) >> dp; return (*this);
+		}
+
+		//Devision
+		constexpr Fixed operator / (const Fixed &f) const
+		{
+			return (form(((T2(this->value) << dp) / T2(f.value))));
+		}
+		//Devision equal
+		constexpr Fixed &operator /= (const Fixed &f)
+		{
+			this->value = ((T2(this->value) << dp) / T2(f.value)); return (*this);
+		}
 };
 
 int main()
 {
+
+	using fp16_16 = Fixed<int32_t, int64_t, 16>;
+	
+	constexpr fp16_16 a(5.6);
+	constexpr fp16_16 b(2.7);
+
+	constexpr double z = double(a + b);
+
+	std::cout << "z = " << z << std::endl;
 //	//16.16
 //	constexpr int32_t a = DoubleToFixed<16>(5.6);
 //	constexpr int32_t b = DoubleToFixed<16>(2.7);
