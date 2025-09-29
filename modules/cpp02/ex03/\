@@ -1,0 +1,12 @@
+#include "Point.hpp"
+
+Fixed	area(Point const a, Point const b, Point const c)
+{
+	Fixed	area = (a.getX() *  b.getY() - c.getY())
+				  + b.getX() * (c.getY() - a.getY())
+				  + c.getX() * (a.getY() - b.getY())) / 2;
+	//Negate the value if sign is negative
+	if (area < 0)
+		area = area * (-1);
+	return (area);
+}

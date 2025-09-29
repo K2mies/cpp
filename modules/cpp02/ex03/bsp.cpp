@@ -1,13 +1,34 @@
 #include "Point.hpp"
 
-
-Fixed	cross_product_2d(Point p1, Point p2, Point p3)
+// Helper function to calculate the area of a triangle
+Fixed	area(Point const a, Point const b, Point const c)
 {
-	Fixed res(p2._x.toFloat() - p1._x.toFloat())
+	Fixed	area = (a.getX() *  b.getY() - c.getY())
+				  + b.getX() * (c.getY() - a.getY())
+				  + c.getX() * (a.getY() - b.getY()) / 2;
+	//Negate the value if sign is negative
+	if (area < 0)
+		area = area * (-1);
+	return (area);
 }
 
+/* Function to calculate wether a point is inside a triangle or not */
+/* returns True if point is inside and False if point is outside*/
 bool	bsp(Point const a, Point const b, Point const c, Point const point)
 {
-	//calculate the cross proucts for the three edges
-	Fixed	ab =
+	Fixed	A0 = area(a, b, c);
+	Fixed	A1 = area(b, c, point);
+	Fixed	A2 = area(a, c, point);
+	Fixed	A3 = area(a, b, point);
+
+	if (A1 == 0 || A2 == 0 || A3 == 0)
+		return (false);
+
+	if	   ((point.getX() == a.getX() && point.getY() == a.getY())
+		||	(point.getX() == b.getX() && point.getY() == b.getY())
+		||	(point.getX() == c.getX() && point.getY() == c.getY()))
+		return (false);
+
+	return (A0 == A1 + A2 + A3);
+
 }
