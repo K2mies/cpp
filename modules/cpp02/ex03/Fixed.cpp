@@ -5,20 +5,20 @@
 // Default Constructor=================================================*
 Fixed::Fixed(void) : _rawBits(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	//std::cout << "Default constructor called" << std::endl;
 }
 
 // Takes Const int as parameter========================================*
 Fixed::Fixed(const int raw)
 {
-	std::cout << "Int constructor called" << std::endl;
+	//std::cout << "Int constructor called" << std::endl;
 	this->_rawBits = (raw << Fixed::_bits);
 }
 
 // Takes Const float as parameter======================================*
 Fixed::Fixed(const float raw)
 {
-	std::cout << "Float constructor called" << std::endl;
+	//std::cout << "Float constructor called" << std::endl;
 	this->_rawBits = std::round(raw * (1 << Fixed::_bits));
 }
 
@@ -28,7 +28,7 @@ Fixed::Fixed(const float raw)
 /* Called when object is created using another object as an arg*/
 Fixed::Fixed(Fixed const &src)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	//std::cout << "Copy constructor called" << std::endl;
 	this->_rawBits = src.getRawBits();
 }
 
@@ -36,7 +36,7 @@ Fixed::Fixed(Fixed const &src)
 // Destructor==========================================================*
 Fixed::~Fixed(void)
 {
-	std::cout << "Destructor called" << std::endl;
+	//std::cout << "Destructor called" << std::endl;
 	return ;
 }
 
@@ -47,7 +47,7 @@ Fixed::~Fixed(void)
 /* Fixed & Fixed returns a reference, allowing us to chain args */
 Fixed &Fixed::operator=(Fixed const &rhs)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	//std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &rhs)
 		this->_rawBits = rhs.getRawBits();
 	return (*this);

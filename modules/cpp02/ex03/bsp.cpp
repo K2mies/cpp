@@ -29,6 +29,8 @@ bool	bsp(Point const a, Point const b, Point const c, Point const point)
 		||	(point.getX() == c.getX() && point.getY() == c.getY()))
 		return (false);
 
-	return (A0 == A1 + A2 + A3);
+	std::cout << "A0 is: " << A0 << std::endl << "A1 + A2 + A3 is: " << A1 + A2 + A3 << std::endl;
+	return (true);
+//	return (A0 == A1 + A2 + A3);
 
 }
