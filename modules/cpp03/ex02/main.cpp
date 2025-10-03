@@ -1,9 +1,11 @@
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int	main(void)
 {
 	ScavTrap	daniel("Daniel");
 	ScavTrap	robert("Robert");
+	FragTrap	will("Will");
 
 	std::cout << "\n------attack and take damage tests-------\n\n";
 	for (int i = 0; i <= 5; i++)
@@ -11,15 +13,16 @@ int	main(void)
 		robert.attack("Daniel");
 		daniel.takeDamage(20);
 	}
+	will.attack("Robert");
+	robert.takeDamage(30);
 
 	std::cout << "\n-------------repair tests----------------\n\n";
 	daniel.beRepaired(1);
 	robert.beRepaired(1);
 
 	std::cout << "\n-----------gate keep tests---------------\n\n";
-	daniel.guardGate();
 	robert.guardGate();
-	robert.guardGate();
+	will.highFiveGuys();
 
 	return (0);
 }

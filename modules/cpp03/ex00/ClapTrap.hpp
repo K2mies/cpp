@@ -10,6 +10,7 @@ class	ClapTrap
 		ClapTrap(void);
 		ClapTrap(std::string name);
 		ClapTrap(ClapTrap const &src);
+		~ClapTrap(void);
 
 		ClapTrap & operator=(ClapTrap const & rhs);
 

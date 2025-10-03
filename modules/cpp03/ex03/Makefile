@@ -1,10 +1,12 @@
-NAME    := ScavTrap
+NAME    := DiamondTrap
 CC      := c++
 FLAGS   := -Wall -Werror -Wextra -std=c++17
 
 SRCS    := main.cpp		\
 		   ClapTrap.cpp	\
-		   ScavTrap.cpp
+		   ScavTrap.cpp	\
+		   FragTrap.cpp	\
+		   DiamondTrap.cpp
 
 OBJ_DIR := objs/
 OBJS    := $(addprefix $(OBJ_DIR), $(SRCS:.cpp=.o))

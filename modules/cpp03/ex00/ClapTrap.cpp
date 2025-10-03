@@ -12,6 +12,12 @@ ClapTrap::ClapTrap(std::string name): _name(name), _hit_points(10), _energy_poin
 	std::cout << "ClapTrap " << name << " constructor called" << std::endl;
 }
 
+//Deconstructor
+ClapTrap::~ClapTrap(void)
+{
+	std::cout << "ClapTrap " << this->_name << "destructed" << std::endl;
+}
+
 // Copy Constructor
 ClapTrap::ClapTrap(ClapTrap const &src)
 {
