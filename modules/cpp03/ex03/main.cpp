@@ -2,6 +2,7 @@
 
 int	main(void)
 {
+	std::cout << "\n-------------Construction----------------\n\n";
 	DiamondTrap	daniel("Daniel");
 	DiamondTrap	robert("Robert");
 
@@ -17,6 +18,7 @@ int	main(void)
 
 	std::cout << "\n-------------whoAmI tests----------------\n\n";
 	robert.whoAmI();
-
+	daniel.whoAmI();
+	std::cout << "\n--------------Destruction----------------\n\n";
 	return (0);
 }

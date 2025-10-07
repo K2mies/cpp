@@ -3,6 +3,7 @@
 
 int	main(void)
 {
+	std::cout << "\n-------------Construction----------------\n\n";
 	ScavTrap	daniel("Daniel");
 	ScavTrap	robert("Robert");
 	FragTrap	will("Will");
@@ -24,5 +25,6 @@ int	main(void)
 	robert.guardGate();
 	will.highFiveGuys();
 
+	std::cout << "\n--------------Destruction----------------\n\n";
 	return (0);
 }

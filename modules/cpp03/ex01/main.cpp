@@ -2,6 +2,7 @@
 
 int	main(void)
 {
+	std::cout << "\n--------------Construction---------------\n\n";
 	ScavTrap	daniel("Daniel");
 	ScavTrap	robert("Robert");
 
@@ -21,5 +22,6 @@ int	main(void)
 	robert.guardGate();
 	robert.guardGate();
 
+	std::cout << "\n---------------Destruction---------------\n\n";
 	return (0);
 }

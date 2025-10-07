@@ -7,18 +7,19 @@
 class	ClapTrap
 {
 	public:
+	// ------------------------------------------------------------ member functions
+		void	attack(const std::string &target);
+		void	takeDamage(unsigned int amount);
+		void	beRepaired(unsigned int amount);
+	// ---------------------------------------------------------------- constructors
 		ClapTrap(void);
 		ClapTrap(std::string name);
 		ClapTrap(std::string name, int hp, int ep, int ap);
 		ClapTrap(ClapTrap const &src);
+	// ------------------------------------------------------------------ destructor
 		~ClapTrap(void);
-
+	// --------------------------------------------------- member operator overloads
 		ClapTrap & operator=(ClapTrap const & rhs);
-
-		void	attack(const std::string &target);
-		void	takeDamage(unsigned int amount);
-		void	beRepaired(unsigned int amount);
-	
 	protected:
 		std::string	_name;
 		int			_hit_points;

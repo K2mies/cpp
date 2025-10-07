@@ -3,18 +3,21 @@
 
 #include "ClapTrap.hpp"
 
-class ScavTrap: public ClapTrap
+class ScavTrap: virtual public ClapTrap
 {
 public:
-	ScavTrap(void);
-	ScavTrap(std::string name);
-	~ScavTrap(void);
-	ScavTrap(const ScavTrap &rhs);
-	ScavTrap &operator=(const ScavTrap &rhs);
-
+// ------------------------------------------------------------ member functions
 	void	attack(const std::string &target);
 	void	guardGate(void);
-private:
+// ---------------------------------------------------------------- constructors
+	ScavTrap(void);
+	ScavTrap(std::string name);
+	ScavTrap(const ScavTrap &rhs);
+// ------------------------------------------------------------------ destructor
+	~ScavTrap(void);
+// --------------------------------------------------- member operator overloads
+	ScavTrap &operator=(const ScavTrap &rhs);
+protected:
 	bool	_guard;
 };
 

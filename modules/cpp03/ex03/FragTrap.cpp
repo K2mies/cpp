@@ -42,25 +42,6 @@ FragTrap &FragTrap::operator=(const FragTrap &rhs)
 	return (*this);
 }
 
-//Member Functions
-//Attack function
-void	FragTrap::attack(const std::string &target)
-{
-	if (this->_energy_points <= 0)
-	{
-		std::cout << "FragTrap " << this->_name << " superattack failed, not enough energy points" << std::endl;
-		return ;
-	}
-	else if (this->_hit_points <= 0)
-	{
-		std::cout << "FragTrap " << this->_name << "is head" << std::endl;
-		return ;
-	}
-	std::cout << "FragTrap " << this->_name << "superattacks " << target;
-	std::cout << ", causing " << this->_attack_damage << " points of damage!" << std::endl;
-	this->_energy_points -= 1;
-}
-
 // High Five
 void	FragTrap::highFiveGuys(void)
 {

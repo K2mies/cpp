@@ -44,3 +44,10 @@ DiamondTrap &DiamondTrap::operator=(DiamondTrap const &rhs)
 	std::cout << "DiamondTrap " << this->_name << " copy assignment called" << std::endl;
 	return (*this);
 }
+
+// Who am i function
+void	DiamondTrap::whoAmI()
+{
+	std::cout << "ClapTrap name: " << ClapTrap::_name << std::endl;
+	std::cout << "DiamondRTrap name: " << this->_name << std::endl;
+}
