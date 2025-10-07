@@ -16,7 +16,7 @@ DiamondTrap::DiamondTrap(void): ClapTrap(), ScavTrap(), FragTrap()
 DiamondTrap::DiamondTrap(std::string name): ClapTrap(name), ScavTrap(name), FragTrap(name)
 {
 	this->_name = name;
-	ClapTrap::_name + "_clap_name";
+	ClapTrap::_name += "_clap_name";
 	this->_hit_points = FragTrap::_hit_points;
 	this->_energy_points = ScavTrap::_energy_points;
 	this->_attack_damage = FragTrap::_attack_damage;
