@@ -1,25 +1,25 @@
-#include "Dog.hpp"
+#include "Cat.hpp"
 
 // ----------------------------------------------------------------- constructor
-Dog::Dog(): brain(new Brain())
+Cat::Cat() : brain(new Brain())
 {
-	type = "Dog";
-	std::cout << "Dog default constructor called" << std::endl;
+	type = "Cat";
+	std::cout << "Cat default constructor called" << std::endl;
 }
 
 // ------------------------------------------------------------ copy constructor
-Dog::Dog(const Dog &other) : Animal(other), brain(new Brain(*other.brain))
+Cat::Cat(const Cat &other) : AAnimal(other), brain(new Brain(*other.brain))
 {
-	std::cout << "Dog copy constructor called" << std::endl;
+	std::cout << "Cat copy constructor called" << std::endl;
 }
 
 // --------------------------------------------------- member operator overloads
-Dog &Dog::operator=(const Dog &other)
+Cat &Cat::operator=(const Cat &other)
 {
-	std::cout << "Dog copy assignment operator called" << std::endl;
+	std::cout << "Cat copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
-		Animal::operator=(other);
+		AAnimal::operator=(other);
 		delete brain;
 		brain = new Brain(*other.brain);
 	}
@@ -27,25 +27,25 @@ Dog &Dog::operator=(const Dog &other)
 }
 
 // ------------------------------------------------------------------ destructor
-Dog::~Dog()
+Cat::~Cat()
 {
 	delete brain;
-	std::cout << "Dog destructor called" << std::endl;
+	std::cout << "Cat destructor called" << std::endl;
 }
 
 // ------------------------------------------------------------ member functions
-void	Dog::makeSound() const
+void	Cat::makeSound() const
 {
-	std::cout << "wuff" << std::endl;
+	std::cout << "Meow" << std::endl;
 }
 
 // ----------------------------------------------------------- getters & setters
-std::string Dog::getIdea(int i)
+std::string	Cat::getIdea(int i)
 {
 	return (brain->getIdea(i));
 }
 
-void	Dog::setIdea(int i, std::string s)
+void	Cat::setIdea(int i, std::string s)
 {
 	brain->setIdea(i, s);
 }

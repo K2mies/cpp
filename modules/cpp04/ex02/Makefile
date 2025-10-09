@@ -1,9 +1,9 @@
-NAME    := Brain
+NAME    := Abstract
 CC      := c++
 FLAGS   := -Wall -Werror -Wextra -std=c++17
 
 SRCS    := main.cpp			\
-		   Animal.cpp		\
+		   AAnimal.cpp		\
 		   Cat.cpp			\
 		   Dog.cpp			\
 		   Brain.cpp

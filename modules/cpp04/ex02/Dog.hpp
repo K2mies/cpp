@@ -1,10 +1,10 @@
-#ifndef CAT_HPP
-#define CAT_HPP
+#ifndef DOG_HPP
+#define DOG_HPP
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 
-class Cat: public Animal
+class Dog: public AAnimal
 {
 private:
 // ---------------------------------------------------- private member variables
@@ -16,12 +16,11 @@ public:
 	std::string getIdea(int i);
 	void		setIdea(int i, std::string s);
 // ---------------------------------------------------------------- constructors
-	Cat();
-	Cat(const Cat &other);
+	Dog();
+	Dog(const Dog &other);
 // ------------------------------------------------------------------ destructor
-	~Cat() override;
+	~Dog() override;
 // --------------------------------------------------- member operator overloads
-	Cat &operator=(const Cat &other);
+	Dog &operator=(const Dog &other);
 };
 #endif
-
