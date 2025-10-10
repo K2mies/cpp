@@ -1,12 +1,12 @@
 #pragma once
 
-#ifndef ICE_HPP
-#define ICE_HPP
+#ifndef CURE_HPP
+#define CURE_HPP
 
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
 
-class Ice : public AMateria
+class Cure : public AMateria
 {
 	protected:
 	// -------------------------------------------------- protected member variables
@@ -16,11 +16,11 @@ class Ice : public AMateria
 	AMateria	*clone() const override;
 	void		use(ICharacter &target) override;
 	// ---------------------------------------------------------------- constructors
-	Ice();
-	Ice(const Ice &copy) = delete;
+	Cure();
+	Cure(const Cure &copy) = delete;
 	// ------------------------------------------------------------------ destructor
-	~Ice() = default;			   // default = same as creating an empty destructor
+	~Cure() = default;			   // default = same as creating an empty destructor
 	// --------------------------------------------------- member operator overloads
-	Ice &operator=(const Ice &copy) = delete;
+	Cure &operator=(const Cure &copy) = delete;
 };
 #endif
