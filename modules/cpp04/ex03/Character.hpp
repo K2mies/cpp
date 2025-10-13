@@ -23,11 +23,13 @@ class Character : public ICharacter
 		void				unequip(int idx)					override;
 		void				use(int idx, ICharacter &target)	override;
 	// ---------------------------------------------------------------- constructors
-		Character() = delete;
+		Character();
 		Character(const std::string &name);
-		Character(const Character &src);
+		Character(const Character &other);
 	// ------------------------------------------------------------------ destructor
 		~Character();
+	// --------------------------------------------------- member operator overloads
+		Character &operator=(const Character &other);
 };
 
 #endif

@@ -17,10 +17,10 @@ class Cure : public AMateria
 	void		use(ICharacter &target) override;
 	// ---------------------------------------------------------------- constructors
 	Cure();
-	Cure(const Cure &copy) = delete;
+	Cure(const Cure &copy);
 	// ------------------------------------------------------------------ destructor
-	~Cure() = default;			   // default = same as creating an empty destructor
+	~Cure();			   // default = same as creating an empty destructor
 	// --------------------------------------------------- member operator overloads
-	Cure &operator=(const Cure &copy) = delete;
+	Cure &operator=(const Cure &copy);
 };
 #endif

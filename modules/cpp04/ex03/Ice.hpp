@@ -17,10 +17,10 @@ class Ice : public AMateria
 	void		use(ICharacter &target) override;
 	// ---------------------------------------------------------------- constructors
 	Ice();
-	Ice(const Ice &copy) = delete;
+	Ice(const Ice &copy);
 	// ------------------------------------------------------------------ destructor
-	~Ice() = default;			   // default = same as creating an empty destructor
+	~Ice();			   // default = same as creating an empty destructor
 	// --------------------------------------------------- member operator overloads
-	Ice &operator=(const Ice &copy) = delete;
+	Ice &operator=(const Ice &copy);
 };
 #endif

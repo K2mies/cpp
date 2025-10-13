@@ -21,10 +21,10 @@ class AMateria
 	// ---------------------------------------------------------------- constructors
 		AMateria() = delete;
 		AMateria(const std::string &type);
-		AMateria(const AMateria &copy) = delete;				 // copy constructor
+		AMateria(const AMateria &copy);				 // copy constructor
 	// ------------------------------------------------------------------ destructor
 		virtual ~AMateria();	  // same as creating an empty deconstructor
 	// --------------------------------------------------- member operator overloads
-		AMateria &operator=(const AMateria &copy) = delete;
+		AMateria &operator=(const AMateria &copy);
 };
 #endif
