@@ -18,7 +18,4 @@ int	main()
     in_file.readFromFile();
     in_file.replace(s1, s2);
     in_file.writeToFile(filename + ".replace");
-
-    
-
 }

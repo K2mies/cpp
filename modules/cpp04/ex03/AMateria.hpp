@@ -15,11 +15,11 @@ class AMateria
 	public:
 	// ------------------------------------------------------------ member functions
 		virtual	AMateria	*clone() const = 0;
-		virtual void		use(ICharacter &target);
+		virtual void		use(ICharacter &target) = 0;
 	// ----------------------------------------------------------- getters & setters
 		std::string const	&getType() const; 			 // Returns the materia type
 	// ---------------------------------------------------------------- constructors
-		AMateria() = delete;
+		AMateria() = delete;    // delete stops default constructor from being called
 		AMateria(const std::string &type);
 		AMateria(const AMateria &copy);				 // copy constructor
 	// ------------------------------------------------------------------ destructor

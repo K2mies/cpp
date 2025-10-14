@@ -48,7 +48,6 @@ void    File::readFromFile()
     while (std::getline(_file, line))
     {
         _content += line + "\n";
-
     }
 }
 
