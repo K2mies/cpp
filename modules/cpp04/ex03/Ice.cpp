@@ -1,6 +1,6 @@
 #include "Ice.hpp"
 #include <iostream>
-
+#include "ansi_colors.hpp"
 // ------------------------------------------------------------ member functions
 AMateria	*Ice::clone() const
 {
@@ -9,7 +9,7 @@ AMateria	*Ice::clone() const
 
 void	Ice::use(ICharacter &target)
 {
-	std::cout << "* shoots an ice bold at *" << target.getName() << std::endl;
+	std::cout << "* shoots an" C_B_HI_B " ice bolt " C_RST "at" << C_B_HI_R << " " << target.getName() << C_RST  << " *"<< std::endl;
 }
 
 // ---------------------------------------------------------------- constructors

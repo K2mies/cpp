@@ -1,5 +1,6 @@
 #include "Cure.hpp"
 #include <iostream>
+#include "ansi_colors.hpp"
 
 // ------------------------------------------------------------ member functions
 AMateria	*Cure::clone() const
@@ -9,7 +10,7 @@ AMateria	*Cure::clone() const
 
 void Cure::use(ICharacter &target)
 {
-	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
+	std::cout << "*" C_B_HI_G " heals " C_RST << C_B_HI_R << target.getName() << "'s" << C_RST << " wounds *" << std::endl;
 }
 
 // ---------------------------------------------------------------- constructors
