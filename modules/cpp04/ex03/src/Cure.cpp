@@ -19,7 +19,8 @@ Cure::Cure() : AMateria("cure"){};
 Cure::Cure(const Cure &other) : AMateria(other) {}
 
 // ------------------------------------------------------------------ destructor
-Cure::~Cure(){}
+//in the header is ~Cure() = default which is the same as below so implamentation is not needed in this case
+//Cure::~Cure(){}
 
 
 // --------------------------------------------------- member operator overloads

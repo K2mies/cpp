@@ -19,7 +19,7 @@ class Cure : public AMateria
 	Cure();
 	Cure(const Cure &copy);
 	// ------------------------------------------------------------------ destructor
-	~Cure();			   // default = same as creating an empty destructor
+	~Cure() = default;			   // default = same as creating an empty destructor
 	// --------------------------------------------------- member operator overloads
 	Cure &operator=(const Cure &copy);
 };
