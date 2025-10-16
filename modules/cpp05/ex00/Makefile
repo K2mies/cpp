@@ -16,23 +16,14 @@ FLAGS		:=	-Wall -Werror -Wextra -std=c++17
 DEBUG_FLAGS	:=	-g
 # ---------------------------------------------------------------------------- #
 INC_DIR		:=	./inc
-HEADERS		:=	$(INC_DIR)/AMateria.hpp			\
-				$(INC_DIR)/ICharacter.hpp		\
-				$(INC_DIR)/IMateriaSource.hpp	\
-				$(INC_DIR)/MateriaSource.hpp	\
-				$(INC_DIR)/Character.hpp		\
-				$(INC_DIR)/Ice.hpp				\
-				$(INC_DIR)/Cure.hpp				\
+HEADERS		:=	$(INC_DIR)/Bureaucrat.hpp		\
+				$(INC_DIR)/ansi_colors.hpp		\
 # ---------------------------------------------------------------------------- #
 SRC_DIR		:=	./src
 OBJ_DIR		:=	./obj
 # ---------------------------------------------------------------------------- #
 SRC			:=	$(SRC_DIR)/main.cpp				\
-				$(SRC_DIR)/AMateria.cpp			\
-				$(SRC_DIR)/MateriaSource.cpp	\
-				$(SRC_DIR)/Character.cpp		\
-				$(SRC_DIR)/Ice.cpp				\
-				$(SRC_DIR)/Cure.cpp				\
+				$(SRC_DIR)/Bureaucrat.cpp		\
 
 # ---------------------------------------------------------------------------- #
 OBJ			:=	$(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC))
