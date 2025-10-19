@@ -12,7 +12,7 @@
 
 NAME		:=	Form
 CC			:=	c++
-FLAGS		:=	-Wall -Werror -Wextra -std=c++17
+FLAGS		:=	-Wall -Werror -Wextra -std=c++20
 DEBUG_FLAGS	:=	-g
 # ---------------------------------------------------------------------------- #
 INC_DIR		:=	./inc

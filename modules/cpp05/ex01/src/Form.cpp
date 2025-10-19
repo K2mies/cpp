@@ -68,7 +68,7 @@ bool Form::getIsSigned() const
 // ------------------------------------------------------------------ exceptions
 const char *Form::GradeTooLowException::what() const noexcept
 {
-	return (C_HI_R "Forms grade too low!" C_RST);
+	return (C_HI_R "Forms grade too low!" C_RST);   
 }
 
 const char *Form::GradeTooHighException::what() const noexcept
@@ -79,10 +79,14 @@ const char *Form::GradeTooHighException::what() const noexcept
 // ---------------------------------------------------------- operator overloads
 std::ostream &operator<<(std::ostream &os, const Form &form)
 {
-	os << "Form " << C_HI_B << form.getName() << C_RST
-	   << " is "  << C_HI_R << (form.getIsSigned() ? "signed" : "unsigned") << C_RST
-	   << ", grade to sign: "		<< C_HI_Y << form.getGradeToSign() << C_RST
-	   << ", grade to execute: "	<< C_HI_Y << form.getGradeToExec() << C_RST
-	   << std::endl;
+	os  << "Form "
+        << C_HI_B << form.getName()                                 << C_RST
+	    << " is "
+        << C_HI_R << (form.getIsSigned() ? "signed" : "unsigned")   << C_RST
+	    << ", grade to sign: "
+        << C_HI_Y << form.getGradeToSign()                          << C_RST
+	    << ", grade to execute: "
+        << C_HI_Y << form.getGradeToExec()                          << C_RST
+	    << std::endl;
 	return (os);
 }

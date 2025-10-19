@@ -20,18 +20,28 @@ void	Bureaucrat::signForm(Form &form) const
 	try
 	{
 		form.beSigned(*this);
-		std::cout << C_HI_P << _name << C_RST << " signed "
-				  << C_HI_B << form.getName() << C_RST << " form"
-				  << std::endl;
+		std::cout 
+        << C_HI_P << _name                  << C_RST
+        << " signed "
+		<< C_HI_B << form.getName()         << C_RST
+        << " form"
+		<< std::endl;
 	}
 	catch(std::exception &e)
 	{
 		std::cout
-		<< C_HI_P << _name << C_RST << " couldn't sign "
-		<< C_HI_B << form.getName() << C_RST << " form because: "
-		<< C_HI_P << _name << "'s"  << C_RST << " grade is " << C_HI_Y << getGrade() << C_RST
-		<< ", \nthe grade required to sign " << C_HI_B << form.getName() << C_RST
-		<< " form is " << C_HI_Y << form.getGradeToSign() << C_RST << "."
+		<< C_HI_P << _name                  << C_RST
+        << " couldn't sign "
+		<< C_HI_B << form.getName()         << C_RST
+        << " form because: "
+		<< C_HI_P << _name << "'s"          << C_RST
+        << " grade is "
+        << C_HI_Y << getGrade()             << C_RST
+		<< ", \nthe grade required to sign "
+        << C_HI_B << form.getName()         << C_RST
+		<< " form is "                      
+        << C_HI_Y   << form.getGradeToSign()<< C_RST
+        << "."
 		<< std::endl;
 	}
 }
@@ -74,7 +84,8 @@ const char *Bureaucrat::GradeTooHighException::what() const noexcept
 // ---------------------------------------------------------------- constructors
 Bureaucrat::Bureaucrat(): _name("unnamed"), _grade(MIN_GRADE) {};
 
-Bureaucrat::Bureaucrat(const std::string &name, unsigned int grade) : _name(name), _grade(grade)
+Bureaucrat::Bureaucrat(const std::string &name, unsigned int grade)
+                                        : _name(name), _grade(grade)
 {
 	if (grade < MAX_GRADE)
 		throw	GradeTooHighException();
@@ -87,7 +98,10 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name), _grade(oth
 // ---------------------------------------------------------- operator overloads
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &current)
 {
-	os << C_HI_P << current.getName() << "'s" << C_RST << " Bureaucrat grade is: " << C_B_HI_Y << current.getGrade() << C_RST << std::endl;
+	os  << C_HI_P << current.getName() << "'s"  << C_RST
+        << " Bureaucrat grade is: "
+        << C_B_HI_Y << current.getGrade()       << C_RST
+        << std::endl;
 	return (os);
 }
 
