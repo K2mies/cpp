@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 12:16:35 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/10/16 13:52:08 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/10/20 11:50:17 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/10/20 11:57:13 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #pragma once
 
 #ifndef BUREAUCRAT_HPP
@@ -17,12 +16,12 @@
 
 #include <iostream>
 #include <exception>
-#include "Form.hpp"
+#include "AForm.hpp"
 
 #define	MAX_GRADE	1
 #define	MIN_GRADE	150
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -36,10 +35,11 @@ class Bureaucrat
 	// --------------------------------------------------- member operator overloads
 		Bureaucrat &operator=(Bureaucrat const &other) = delete;
 	// ------------------------------------------------------------ member functions
-		void				signForm(Form &form) const;
+		void				executeForm(AForm &form)	const;
+		void				signForm(AForm &form)		const;
 	// ----------------------------------------------------------- getters & setters
-		std::string 		getName() 	const;
-		unsigned int		getGrade() 	const;
+		std::string 		getName()					const;
+		unsigned int		getGrade()					const;
 	// --------------------------------------------- incramentation & decrementation
 		void				incrementGrade();
 		void				decrementGrade();

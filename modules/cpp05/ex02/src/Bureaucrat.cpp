@@ -15,7 +15,33 @@
 
 
 // ------------------------------------------------------------ member functions
-void	Bureaucrat::signForm(Form &form) const
+void	Bureaucrat::executeForm(AForm &form) const
+{
+	try
+	{
+		form.execute(*this);
+		std::cout 
+		<< C_HI_P << _name                  << C_RST
+		<< " executed "
+		<< C_HI_B << form.getName()         << C_RST
+		<< " form"
+		<< std::endl;
+	}
+	catch(std::exception &e)
+	{
+		std::cout
+		<< C_HI_P << _name                  << C_RST
+		<< " couldn't execute "
+		<< C_HI_B << form.getName()         << C_RST
+		<< " form because: "
+		<< C_HI_P << _name << "'s "          << C_RST
+		<< C_HI_R << e.what()		    << C_RST
+		<< "."
+		<< std::endl;
+	}
+}
+
+void	Bureaucrat::signForm(AForm &form) const
 {
 	try
 	{
