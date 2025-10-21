@@ -34,6 +34,7 @@ void	Bureaucrat::executeForm(AForm &form) const
 		<< " couldn't execute "
 		<< C_HI_B << form.getName()         << C_RST
 		<< " form because: "
+		<< std::endl
 		<< C_HI_P << _name << "'s "          << C_RST
 		<< C_HI_R << e.what()		    << C_RST
 		<< "."
