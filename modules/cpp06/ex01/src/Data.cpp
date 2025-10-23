@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Data.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/22 15:47:43 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/10/22 15:55:40 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/10/23 15:18:47 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/10/23 15:21:44 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ScalarConverter.hpp"
-#include <iostream>
+#include "Data.hpp"
 
-int	main(int argc, char **argv)
+Data:: Data(const Data &other) : x(other.x) {}
+
+Data &Data::operator=(const Data &other)
 {
-	if (argc != 2)
+	if (this != &other)
 	{
-		std::cout << "Usage: ./convert <literal>" << std::endl;
-		return 1;
+		x = other.x;
 	}
-	std::string str = argv[1];
-	ScalarConverter::convert(str);
-	return (0);
+	return (*this);
 }

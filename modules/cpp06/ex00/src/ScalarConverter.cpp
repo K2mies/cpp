@@ -255,6 +255,7 @@ static void convertFloat(const std::string &str)
 		&& std::trunc(f) >= static_cast<float>(std::numeric_limits<int>::min()))
 	{
 		i = static_cast<int>(std::trunc(f));
+		iPtr = &i;
 	}
 	if (std::trunc(f) >= 0 && std::trunc(f) <= 127)
 	{
