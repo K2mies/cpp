@@ -26,7 +26,7 @@ class Bureaucrat
 	private:
 	// ---------------------------------------------------- private member variables
 		const std::string	_name;
-		int					_grade;
+		unsigned int		_grade;
 	public:
 	// ----------------------------------------------------------- getters & setters
 		std::string 		getName() 	const;

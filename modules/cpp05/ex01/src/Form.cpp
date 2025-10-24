@@ -51,12 +51,12 @@ const std::string Form::getName() const
 	return (this->_name);
 }
 
-const	unsigned int Form::getGradeToSign() const
+unsigned int Form::getGradeToSign() const
 {
 	return (this->_gradeToSign);
 }
 
-const unsigned int Form::getGradeToExec() const
+unsigned int Form::getGradeToExec() const
 {
 	return (this->_gradeToExec);
 }
