@@ -10,22 +10,22 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	Serializer
+NAME		:=	TypeIdentification
 CC			:=	c++
 FLAGS		:=	-Wall -Werror -Wextra -std=c++20
 DEBUG_FLAGS	:=	-g
 # ---------------------------------------------------------------------------- #
 INC_DIR		:=	./inc
-HEADERS		:=	$(INC_DIR)/Serializer.hpp				\
-				$(INC_DIR)/Data.hpp						\
+HEADERS		:=	$(INC_DIR)/Base.hpp						\
+				$(INC_DIR)/A.hpp						\
+				$(INC_DIR)/B.hpp						\
+				$(INC_DIR)/C.hpp						\
 				$(INC_DIR)/ansi_colors.hpp
 # ---------------------------------------------------------------------------- #
 SRC_DIR		:=	./src
 OBJ_DIR		:=	./obj
 # ---------------------------------------------------------------------------- #
 SRC			:=	$(SRC_DIR)/main.cpp						\
-				$(SRC_DIR)/Serializer.cpp				\
-				$(SRC_DIR)/Data.cpp
 
 # ---------------------------------------------------------------------------- #
 OBJ			:=	$(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC))
@@ -45,7 +45,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
 	@mkdir -p $(OBJ_DIR)
-	$(CXX) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+	$(CXX) $(FLAGS) -I $(INC_DIR) -c $< -o $@
 
 # ---------------------------------------------------------------------------- #
 clean:

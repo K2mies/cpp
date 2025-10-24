@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rand_test.cpp                                      :+:      :+:    :+:   */
+/*   B.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 11:03:20 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/10/24 11:24:19 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/10/24 14:41:09 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/10/24 14:41:11 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-//#include <random>
-#include <cstdlib>
-#include <ctime>
+#pragma once
 
-enum DerivedType : unsigned int
-{
-	A,
-	B,
-	C
-};
+#ifndef B_HPP
+#define B_HPP
 
- int	main()
-{
-	srand(time(NULL));
-	int	r = (rand() % 3);
-//	std::random_device rd;
-//	size_t				r = rd() % 3;
+#include "Base.hpp"
 
-	std::cout << "random number is: " << r << std::endl;
-}
+class Base;
+
+class B : public Base {};
+
+#endif
