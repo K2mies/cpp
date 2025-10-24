@@ -41,8 +41,8 @@ class AForm
 	// ----------------------------------------------------------- getters & setters
 		const std::string		getName()			const;
 		const std::string		getTarget()			const;
-		const unsigned int		getGradeToSign()	const;
-		const unsigned int		getGradeToExec()	const;
+		unsigned int			getGradeToSign()	const;
+		unsigned int			getGradeToExec()	const;
 		bool					getIsSigned()		const;
 	// ------------------------------------------------------------------ exceptions
 		class					GradeTooHighException : public std::exception

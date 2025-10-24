@@ -14,7 +14,15 @@
 #include <iostream>
 #include <fstream>
 
-const std::string shrubbery = "SHUBSHUBSHUBSHUBSHUBSHUBSHUBSHUBSHUBSHUBSHUB";
+const std::string shrubbery = 
+R"(    *
+   /.\
+  /o..\
+  /..o\
+ /.o..o\
+ /...o.\
+/..o....\
+^^^[_]^)";
 
 // ---------------------------------------------------------------- constructors
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)

@@ -18,6 +18,7 @@
 
 int	main()
 {
+	srand(time(0)); // needed for random number generator in RobotomyRequestForm.cpp
 	std::cout << "===================================== " C_B_HI_Y "Shrubbery" C_RST " ======================================\n";
 	std::cout << C_B_HI_W "\n------------------------------------------------------------------ shrubbery creation\n" C_RST;
 	ShrubberyCreationForm	shrub("Hive");

@@ -22,7 +22,7 @@ class PresidentialPardonForm : public AForm
 {
 	public:
 	// ---------------------------------------------------------------- constructors
-		PresidentialPardonForm() = default;
+		PresidentialPardonForm() = delete;
 		PresidentialPardonForm(const std::string &target);
 		PresidentialPardonForm(const PresidentialPardonForm &) = delete;
 	// ------------------------------------------------------------------ destructor

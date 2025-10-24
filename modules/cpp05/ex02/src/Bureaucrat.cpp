@@ -87,14 +87,14 @@ void	Bureaucrat::incrementGrade()
 {
 	if (_grade >= MIN_GRADE)
 		throw GradeTooLowException();
-	_grade++;
+	_grade--;
 }
 
 void	Bureaucrat::decrementGrade()
 {
 	if (_grade <= MAX_GRADE)
 		throw GradeTooHighException();
-	_grade--;
+	_grade++;
 }
 
 // ------------------------------------------------------------------ exceptions

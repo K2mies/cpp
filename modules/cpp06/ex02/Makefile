@@ -10,30 +10,22 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	Intern
+NAME		:=	Serializer
 CC			:=	c++
 FLAGS		:=	-Wall -Werror -Wextra -std=c++20
 DEBUG_FLAGS	:=	-g
 # ---------------------------------------------------------------------------- #
 INC_DIR		:=	./inc
-HEADERS		:=	$(INC_DIR)/Intern.hpp					\
-				$(INC_DIR)/Bureaucrat.hpp				\
-				$(INC_DIR)/AForm.hpp					\
-				$(INC_DIR)/ShrubberyCreationForm.hpp	\
-				$(INC_DIR)/RobotomyRequestForm.hpp		\
-				$(INC_DIR)/PresidentialPardonForm.hpp	\
+HEADERS		:=	$(INC_DIR)/Serializer.hpp				\
+				$(INC_DIR)/Data.hpp						\
 				$(INC_DIR)/ansi_colors.hpp
 # ---------------------------------------------------------------------------- #
 SRC_DIR		:=	./src
 OBJ_DIR		:=	./obj
 # ---------------------------------------------------------------------------- #
 SRC			:=	$(SRC_DIR)/main.cpp						\
-				$(SRC_DIR)/Intern.cpp					\
-				$(SRC_DIR)/Bureaucrat.cpp				\
-				$(SRC_DIR)/AForm.cpp					\
-				$(SRC_DIR)/ShrubberyCreationForm.cpp	\
-				$(SRC_DIR)/RobotomyRequestForm.cpp		\
-				$(SRC_DIR)/PresidentialPardonForm.cpp	
+				$(SRC_DIR)/Serializer.cpp				\
+				$(SRC_DIR)/Data.cpp
 
 # ---------------------------------------------------------------------------- #
 OBJ			:=	$(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC))
@@ -53,7 +45,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
 	@mkdir -p $(OBJ_DIR)
-	$(CXX) $(FLAGS) -I $(INC_DIR) -c $< -o $@
+	$(CXX) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
 # ---------------------------------------------------------------------------- #
 clean:

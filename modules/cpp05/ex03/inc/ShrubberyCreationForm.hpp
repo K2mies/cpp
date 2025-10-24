@@ -22,7 +22,7 @@ class ShrubberyCreationForm : public AForm
 {
 	public:
 	// ---------------------------------------------------------------- constructors
-		ShrubberyCreationForm() = default;
+		ShrubberyCreationForm() = delete;
 		ShrubberyCreationForm(const std::string &target);
 		ShrubberyCreationForm(const ShrubberyCreationForm &) = delete;
 	// ------------------------------------------------------------------ destructor

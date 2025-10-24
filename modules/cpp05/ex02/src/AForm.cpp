@@ -56,12 +56,12 @@ const std::string AForm::getTarget() const
 	return (this->_target);
 }
 
-const	unsigned int AForm::getGradeToSign() const
+unsigned int AForm::getGradeToSign() const
 {
 	return (this->_gradeToSign);
 }
 
-const unsigned int AForm::getGradeToExec() const
+unsigned int AForm::getGradeToExec() const
 {
 	return (this->_gradeToExec);
 }

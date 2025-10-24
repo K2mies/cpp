@@ -22,7 +22,7 @@ class RobotomyRequestForm : public AForm
 {
 	public:
 	// ---------------------------------------------------------------- constructors
-		RobotomyRequestForm() = default;
+		RobotomyRequestForm() = delete;
 		RobotomyRequestForm(const std::string &target);
 		RobotomyRequestForm(const RobotomyRequestForm &) = delete;
 	// ------------------------------------------------------------------ destructor
