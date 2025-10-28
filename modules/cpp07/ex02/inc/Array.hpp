@@ -11,29 +11,28 @@
 /* ************************************************************************** */
 #pragma once
 
-#ifndef ARRAY_HPP
-#define ARRAY_HPP
-
-#include "Array.tpp"
 #include <iostream>
+#include <exception>
 
 template <typename T>
 class Array
 {
-	private:
-		T		*_array;
-		size_t	_length;
 	public:
+	// ---------------------------------------------------------------- constructors
 		Array();
-		Array(unsigned int);
-		Array(const Array<T>&);
-		Array<T> &operator=(const Array<T>&);
-		~Array();
-		
-		T& operator[](size_t);
-		const T& operator[](size_t) const;
-
+		Array(size_t n);
+		Array(Array const &);
+	// ------------------------------------------------------------------ destructor
+		~Array();	
+	// --------------------------------------------------- member operator overloads
+		Array	&operator=(Array const &);
+		T		&operator[](size_t idx) const;
+	// ------------------------------------------------------------ member functions
 		size_t	size() const;
+	private:
+	// ---------------------------------------------------- private member variables
+		size_t	_len = 0;
+		T		*_arr = nullptr;
 };
 
-#endif
+#include "Array.tpp"

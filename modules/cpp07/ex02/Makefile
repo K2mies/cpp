@@ -10,13 +10,14 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	Iter
+NAME		:=	Array
 CC			:=	c++
 FLAGS		:=	-Wall -Werror -Wextra -std=c++20
 DEBUG_FLAGS	:=	-g
 # ---------------------------------------------------------------------------- #
 INC_DIR		:=	./inc
-HEADERS		:=	$(INC_DIR)/iter.hpp						\
+HEADERS		:=	$(INC_DIR)/Array.hpp						\
+				$(INC_DIR)/Array.tpp						\
 				$(INC_DIR)/ansi_colors.hpp
 # ---------------------------------------------------------------------------- #
 SRC_DIR		:=	./src
