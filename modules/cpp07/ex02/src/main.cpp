@@ -68,6 +68,9 @@ int main()
 		arr_d[i] = msg + " " + std::to_string( i );
 	for (size_t i = 0; i < arr_d.size(); ++i)
 		std::cout << "\"" <<  arr_d[i] << "\"" << std::endl;
+	std::cout << C_B_HI_W "\n--------------------------------------------------------------------- int  pointer test\n" C_RST;
+	int	*a = new int();
+	std::cout << *a << std::endl;
 	return (0);
 }
 
