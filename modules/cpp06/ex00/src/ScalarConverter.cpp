@@ -65,7 +65,7 @@ void	ScalarConverter::convert(const std::string &str)
 	std::cout << "Char: ";
 	if (cPtr && std::isprint(c))
 		std::cout << c << std::endl;
-	else if (cPtr && c >= 0 && c <= 127)
+	else if (cPtr)
 		std::cout << C_HI_Y << "Non displayable" << C_RST << std::endl;
 	else
 		std::cout << C_HI_R << "Imposerbru!" << C_RST << std::endl;
@@ -113,15 +113,15 @@ static bool isCharLiteral(const std::string &str)
 {
 	if (str.size() > 3 || str.size() == 2)
 		return false;
-	if (	str.size() == 3
+	if (	
+			str.size() == 3
 			&& str[0] == '\''
 			&& str[2] == '\''
-			&& (str[1] >= 0 && str[1] <= 127)
 		)
 		return true;
-	if (	str.size() == 1
+	if (	
+			str.size() == 1
 			&& !std::isdigit(str[0])
-			&& (str[0] >= 0 && str[0] <= 127)
 		)
 		return true;
 	return false;

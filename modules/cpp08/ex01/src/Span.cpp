@@ -32,7 +32,7 @@ void	Span:: print() const
 {
 	if ( _ints.empty() )
 	{
-		std::cout << "Empty span" << std::endl;
+		std::cout << C_B_HI_R << "Empty span" << C_RST << std::endl;
 		return ;
 	}
 	for ( auto const &i : _ints )
