@@ -65,7 +65,7 @@ void	ScalarConverter::convert(const std::string &str)
 	std::cout << "Char: ";
 	if (cPtr && std::isprint(c))
 		std::cout << c << std::endl;
-	else if (cPtr)
+	else if (cPtr && static_cast<unsigned char>(c) <= 127)
 		std::cout << C_HI_Y << "Non displayable" << C_RST << std::endl;
 	else
 		std::cout << C_HI_R << "Imposerbru!" << C_RST << std::endl;
