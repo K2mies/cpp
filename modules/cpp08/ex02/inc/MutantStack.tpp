@@ -50,13 +50,13 @@ typename MutantStack<T>::const_iterator MutantStack<T>::end() const
 }
 
 template<typename T>
-typename MutantStack<T>::reverse_iterator MutantStack<T>::rbegin() const
+typename MutantStack<T>::reverse_iterator MutantStack<T>::rbegin()
 {
 	return (this->c.rbegin());
 }
 
 template<typename T>
-typename MutantStack<T>::reverse_iterator MutantStack<T>::rend() const
+typename MutantStack<T>::reverse_iterator MutantStack<T>::rend()
 {
 	return (this->c.rend());
 }
