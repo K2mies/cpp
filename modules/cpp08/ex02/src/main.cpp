@@ -80,7 +80,7 @@ void	subject_main_with_list()
 int main()
 {
 	std::cout << "================================== " C_B_HI_Y "Main Subject Test" C_RST " =================================\n";
-	std::cout << C_B_HI_W "\n------------------------------------------------------------------------ Mutant Stack\n" C_RST;
+	std::cout << C_B_HI_W "\n------------------------------------------------------------------- with Mutant Stack\n" C_RST;
 	subject_main();
 	std::cout << C_B_HI_W "\n--------------------------------------------------------------------------- with list\n" C_RST;
 	subject_main_with_list();
