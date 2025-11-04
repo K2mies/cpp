@@ -10,109 +10,80 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ansi_colors.hpp"
-#include "Span.hpp"
 #include <iostream>
-#include <vector>
-#include <random>
-#include <climits>
-
-#define BIG_NUMBER 10000
+#include <list>
+#include "MutantStack.hpp"
+#include "ansi_colors.hpp"
 
 void	subject_main()
 {
-	Span sp = Span(5);
+	MutantStack<int>	mstack;
 
-	sp.addNumber(6);
-	sp.addNumber(3);
-	sp.addNumber(17);
-	sp.addNumber(9);
-	sp.addNumber(11);
+	mstack.push(5);
+	mstack.push(17);
 
-	std::cout << "shortest span:	"	<< C_B_HI_Y << sp.shortestSpan()	<<	C_RST << std::endl;
-	std::cout << "longest span:	"		<< C_B_HI_Y << sp.longestSpan()		<<	C_RST << std::endl;
+	std::cout << mstack.top() << std::endl;
+
+	mstack.pop();
+
+	std::cout << mstack.size() << std::endl;
+
+	mstack.push(3);
+	mstack.push(5);
+	mstack.push(737);
+	//[...]
+	mstack.push(0);
+
+	MutantStack<int>::iterator it = mstack.begin();
+	MutantStack<int>::iterator ite = mstack.end();
+
+	++it;
+	--it;
+	while (it != ite)
+	{
+		std::cout << *it << std::endl;
+		++it;
+	}
+	std::stack<int> s(mstack);
 }
 
-void	large_random_numbers_test()
+void	subject_main_with_list()
 {
-	Span sp = Span(BIG_NUMBER);
-	std::random_device	rd;
-	std::mt19937		generator( rd() );
-	std::uniform_int_distribution<int>	dist( INT_MIN, INT_MAX );
+	std::list<int>	mstack;
 
-	for (size_t i = 0; i < BIG_NUMBER; i++ )
-		sp.addNumber(dist( generator ));
+	mstack.push_back(5);
+	mstack.push_back(17);
 
-	std::cout << "shortest span:	"	<< C_B_HI_Y << sp.shortestSpan()	<< C_RST << std::endl;
-	std::cout << "longest span:	"		<< C_B_HI_Y << sp.longestSpan()		<< C_RST << std::endl;
-	
-}
+	std::cout << mstack.back() << std::endl;
 
-void	add_number_exceptions_test()
-{
-	try
+	mstack.pop_back();
+
+	std::cout << mstack.size() << std::endl;
+
+	mstack.push_back(3);
+	mstack.push_back(5);
+	mstack.push_back(737);
+	//[...]
+	mstack.push_back(0);
+
+	std::list<int>::iterator it = mstack.begin();
+	std::list<int>::iterator ite = mstack.end();
+
+	++it;
+	--it;
+	while (it != ite)
 	{
-		Span	s( 0 );
-		s.print();
-		s.addNumber( 1 );
-	}
-	catch( std::exception const &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	try
-	{
-		Span	s( 3 );
-		std::cout << "size set to 3..." << std::endl;
-		s.addNumber( 1 );
-		s.print();
-		s.addNumber( 2 );
-		s.print();
-		s.addNumber( 3 );
-		s.print();
-		s.addNumber( 4 );
-		s.print();
-	}
-	catch( std::exception const &e)
-	{
-		std::cout << e.what() << std::endl;
+		std::cout << *it << std::endl;
+		++it;
 	}
 }
-
-void	add_via_vector()
-{
-	std::vector<int>	vec = {-42, 4, INT_MIN, 1234, INT_MAX};
-	try
-	{
-		Span	s(vec.size());
-		s.print();
-		for(size_t i = 0; i < vec.size(); i++)
-		{
-			s.addNumber(vec[i]);
-		}
-		s.print();
-		std::cout << "shortest span:	"	<< C_B_HI_Y << s.shortestSpan()		<< C_RST << std::endl;
-		std::cout << "longest span:	"		<< C_B_HI_Y << s.longestSpan()		<< C_RST << std::endl;
-	}
-	catch (std::exception const &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-}
-
-
 int main()
 {
 	std::cout << "================================== " C_B_HI_Y "Main Subject Test" C_RST " =================================\n";
-	std::cout << C_B_HI_W "\n------------------------------------------------------------------------- Vector test\n" C_RST;
+	std::cout << C_B_HI_W "\n------------------------------------------------------------------------ Mutant Stack\n" C_RST;
 	subject_main();
-	std::cout << "===================================== " C_B_HI_Y "Own Tests" C_RST " ======================================\n";
-	std::cout << C_B_HI_W "\n----------------------------------------------------------- Add Number Exception test\n" C_RST;
-	add_number_exceptions_test();
-	std::cout << C_B_HI_W "\n--------------------------------------------------------------- Add via a Vector test\n" C_RST;
-	add_via_vector();
-	std::cout << "============================== " C_B_HI_Y "Large Random Numbers Test" C_RST " =============================\n";
-	large_random_numbers_test();
+	std::cout << C_B_HI_W "\n--------------------------------------------------------------------------- with list\n" C_RST;
+	subject_main_with_list();
 	return (0);
 }
 

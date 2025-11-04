@@ -52,7 +52,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
 	@mkdir -p $(OBJ_DIR)
-	$(CXX) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+	$(CXX) $(FLAGS) -I $(INC_DIR) -c $< -o $@
 
 # ---------------------------------------------------------------------------- #
 clean:
