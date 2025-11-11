@@ -10,20 +10,20 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	MutantStack
+NAME		:=	btc
 CC			:=	c++
 FLAGS		:=	-Wall -Werror -Wextra -std=c++20
 DEBUG_FLAGS	:=	-g
 # ---------------------------------------------------------------------------- #
 INC_DIR		:=	./inc
-HEADERS		:=	$(INC_DIR)/MutantStack.hpp						\
-				$(INC_DIR)/MutantStack.tpp						\
+HEADERS		:=	$(INC_DIR)/BitcoinExchange.hpp			\
 				$(INC_DIR)/ansi_colors.hpp
 # ---------------------------------------------------------------------------- #
 SRC_DIR		:=	./src
 OBJ_DIR		:=	./obj
 # ---------------------------------------------------------------------------- #
 SRC			:=	$(SRC_DIR)/main.cpp						\
+				$(SRC_DIR)/BitcoinExchange.cpp			\
 
 # ---------------------------------------------------------------------------- #
 OBJ			:=	$(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC))

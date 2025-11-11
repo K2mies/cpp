@@ -16,7 +16,24 @@
 #include <regex>
 #include <chrono>
 #include <iomanip>
-/* -------------------------------------------------------------------------- */
+#include <string>
+
+// ----------------------------------------------------------------- definitions
+
+static bool lineMatchesFormat(	std::string	const	&line,
+							    std::smatch			&matches,
+								std::regex	const	&reg,
+								size_t				lineCounter,
+							    std::string const	&fileType	);
+
+static bool	isValidDate(	std::smatch const &matches, 
+							std::string const &fileType,
+							size_t lineCounter	);
+
+static bool floatValueOverflows(	std::smatch const	&matches,
+									std::string const	&fileType,
+									size_t				lineCounter);
+// ----------------------------------------------------------------------- enums
 enum regexMatch	: unsigned int
 {
 	fullmatch,
@@ -27,12 +44,12 @@ enum regexMatch	: unsigned int
 	number,
 	decimal
 };
-/* -------------------------------------------------------------------------- */
+// ---------------------------------------------------------------- constructors
 BitcoinExchange::BitcoinExchange( std::string const &inputFileName,
 								  std::string const &dataFileName )
 	:	_dataFileName( dataFileName),
 		_inputFileName( inputFileName) {}
-/* -------------------------------------------------------------------------- */
+// ------------------------------------------------------------ member functions
 
 void	BitcoinExchange::run()
 {
@@ -42,6 +59,7 @@ void	BitcoinExchange::run()
 
 bool BitcoinExchange::dataParse()
 {
+	// --------------------------------------------------------------- file handling
 	std::ifstream dataFile( _dataFileName );
 
 	if ( !dataFile )
@@ -59,8 +77,101 @@ bool BitcoinExchange::dataParse()
 		std::cout << C_B_HI_R << "Error: " << C_RST << " Empty data file" << std::endl;
 	}
 	dataFile.seekg( streamStart ); //Restore stream to start of file.
-	/* -------------------------------------------------------------------------- */
-	
-	std::regex reg(R"(((^\d{4})-(\d{2})-(\d{2})),([-+]?\d+(\.\d+)?)$)");
+	// ----------------------------------------------------------------------- regex
+	std::regex	reg(R"(((^\d{4})-(\d{2})-(\d{2})),([-+]?\d+(\.\d+)?)$)");
+	std::smatch matches;
+	size_t		lineCounter = 0;
+	// ------------------------------------------------------------------------ loop
+	while ( std::getline( dataFile, line ) )
+	{
+		++lineCounter;
+
+		//check if first line is header
+		if ( lineCounter == 1 && !std::regex_match( line, matches, reg ) )
+			continue;
+		if ( !lineMatchesFormat( line, matches, reg, lineCounter, "Data file" ) )
+			continue;
+		if ( !isValidDate( matches, "Data File", lineCounter ) )
+			continue;
+		//if it clears all checks then it creats an element/key in the map and asigns the value
+		if ( !floatValueOverflows( matches, "Data File", lineCounter ) )
+			_data[ matches[fulldate] ] = std::stof( matches[number] );
+	}
 	return ( true );
+	/* -------------------------------------------------------------------------- */
+}
+
+bool BitcoinExchange::inputParse()
+{
+	return (true);
+}
+
+// ------------------------------------------------------------ static functions
+
+static bool lineMatchesFormat(	std::string	const	&line,
+							    std::smatch			&matches,
+								std::regex	const	&reg,
+								size_t				lineCounter,
+							    std::string const	&fileType	)
+{
+	if (!std::regex_match( line, matches, reg) )
+	{
+		std::cout
+			<< C_B_HI_R << "Error:" << fileType << ": line " << lineCounter
+			<< ": bad input: " << line << C_RST << std::endl;
+	}
+}
+
+static bool	isValidDate(	std::smatch const &matches,
+							std::string const &fileType,
+							size_t lineCounter	)
+{
+	int date_year	= std::stoi( matches[year] );
+	int	date_month	= std::stoi( matches[month] );
+	int date_day	= std::stoi( matches[day] );
+	std::chrono::year_month_day ymd(	static_cast<std::chrono::year>( date_year ),
+										static_cast<std::chrono::month>( date_month ),
+										static_cast<std::chrono::day>( date_day )	);
+	if (!ymd.ok())
+	{
+		std::cout
+			<< C_B_HI_R 
+			<< "Error:"
+			<< fileType
+			<< " "
+			<< ": line "
+			<< lineCounter
+			<< ": date "
+			<< matches[fulldate]
+			<< " is invalid\n"
+			<< C_RST;
+		return false;
+	}
+	return true;
+}
+
+static bool floatValueOverflows(	std::smatch const	&matches,
+									std::string const	&fileType,
+									size_t				lineCounter)
+{
+	try
+	{
+		std::stof( matches[number] );
+	}
+	catch( std::exception const &e)
+	{
+		std::cout
+			<< C_B_HI_R
+			<< "Error:"
+			<< " "
+			<< fileType
+			<< ": line "
+			<< lineCounter
+			<< ": value "
+			<< matches[number]
+			<< C_RST 
+			<< " is invalid.\n";
+		return (true);
+	}
+	return (false);
 }
