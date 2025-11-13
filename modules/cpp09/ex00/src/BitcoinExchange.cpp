@@ -20,15 +20,15 @@
 
 // ----------------------------------------------------------------- definitions
 
-static bool lineMatchesFormat(	std::string	const	&line,
-							    std::smatch			&matches,
-								std::regex	const	&reg,
-								size_t				lineCounter,
-							    std::string const	&fileType	);
+static bool lineMatchesFormat(		std::string	const	&line,
+									std::smatch			&matches,
+									std::regex	const	&reg,
+									size_t				lineCounter,
+									std::string const	&fileType	);
 
-static bool	isValidDate(	std::smatch const &matches, 
-							std::string const &fileType,
-							size_t lineCounter	);
+static bool	isValidDate(			std::smatch const	&matches, 
+									std::string const	&fileType,
+									size_t				lineCounter	);
 
 static bool floatValueOverflows(	std::smatch const	&matches,
 									std::string const	&fileType,
@@ -45,10 +45,10 @@ enum regexMatch	: unsigned int
 	decimal
 };
 // ---------------------------------------------------------------- constructors
-BitcoinExchange::BitcoinExchange( std::string const &inputFileName,
-								  std::string const &dataFileName )
-	:	_dataFileName( dataFileName),
-		_inputFileName( inputFileName) {}
+BitcoinExchange::BitcoinExchange(	std::string const	&inputFileName,
+									std::string const	&dataFileName )
+	:	_dataFileName(	dataFileName ),
+		_inputFileName(	inputFileName ) {}
 // ------------------------------------------------------------ member functions
 
 void	BitcoinExchange::run()
@@ -64,8 +64,15 @@ bool BitcoinExchange::dataParse()
 
 	if ( !dataFile )
 	{
-		std::cout	<< C_B_HI_R << "Error: " << C_RST << " could not open data base file"
-					<< C_B_HI_R << _dataFileName << C_RST << std::endl;
+		std::cout
+			<< C_B_HI_R
+			<< "Error: "
+			<< C_RST
+			<< " could not open data base file"
+			<< C_B_HI_R
+			<< _dataFileName
+			<< C_RST
+			<< std::endl;
 		return ( false );
 	}
 	auto streamStart = dataFile.tellg(); //bookmarks the start position of the file
@@ -74,7 +81,12 @@ bool BitcoinExchange::dataParse()
 	std::getline(dataFile, line);
 	if ( line.empty() && !dataFile) //check for empty file (a single newline also counts)
 	{
-		std::cout << C_B_HI_R << "Error: " << C_RST << " Empty data file" << std::endl;
+		std::cout
+			<< C_B_HI_R
+			<< "Error: "
+			<< C_RST
+			<< " Empty data file"
+			<< std::endl;
 	}
 	dataFile.seekg( streamStart ); //Restore stream to start of file.
 	// ----------------------------------------------------------------------- regex
@@ -103,9 +115,140 @@ bool BitcoinExchange::dataParse()
 
 bool BitcoinExchange::inputParse()
 {
-	return (true);
-}
+	// --------------------------------------------------------------- file handling
+	std::ifstream inputFile( _inputFileName );
+	if ( !inputFile )
+	{
+		std::cout
+			<< C_B_HI_R
+			<< "Error: "
+			<< "Couldn't open input file "
+			<< _inputFileName
+			<< C_RST
+			<< std::endl;
+		return ( false );
+	}
 
+	auto	streamStart = inputFile.tellg();
+	std::string line;
+
+	std::getline( inputFile, line );
+	if ( line.empty() && !inputFile )
+	{
+		std::cout
+			<< C_B_HI_R
+			<< "Error: "
+			<< "Empty Input file."
+			<< C_RST
+			<< std::endl;
+	}
+
+	inputFile.seekg( streamStart ); //resets filestream to begining of file.
+	// ----------------------------------------------------------------------- regex
+	std::regex	reg( R"(\s*((\d{4})-(\d{2})-(\d{2}))\s*\|\s*([+-]?\d+(\.\d+)?)\s*$)" );
+	std::smatch	matches;
+	size_t		lineCounter = 0;
+	// ------------------------------------------------------------------------ loop
+	while ( std::getline( inputFile, line ) )
+	{
+		++lineCounter;
+
+		if ( lineCounter == 1 && !std::regex_match( line, matches, reg ) )
+			continue;
+
+		if ( !lineMatchesFormat( line, matches, reg, lineCounter, "Input file") )
+			continue;
+
+		if ( !isValidDate( matches, "Input file", lineCounter ) )
+			continue;
+
+		if ( floatValueOverflows( matches, "Input file", lineCounter ) )
+			continue;
+
+		float	value = std::stof( matches[number] );
+	// ---------------------------------------------------------------- float limits
+		if ( value < 0 )
+		{
+			std::cout
+				<< C_B_HI_R
+				<< "Error: "
+				<< "Input file: line "
+				<< lineCounter
+				<< ": number "
+				<< matches[number]
+				<< "is not positive"
+				<< C_RST
+				<< std::endl;
+			continue;
+		}
+
+		if ( value > 1000 )
+		{
+			std::cout
+				<< C_B_HI_R
+				<< "Error: "
+				<< "Input file: line "
+				<< lineCounter
+				<< ": number "
+				<< matches[number]
+				<< " is over 1000"
+				<< C_RST
+				<< std::endl;
+			continue;
+		}
+	// ---------------------------------------------------------------- closest date
+		std::string closestDate = std::string( 10, 0 );
+
+		for ( auto &d : _data)
+		{
+			if ( d.first <= matches[fulldate] && d.first > closestDate )
+				closestDate = d.first;
+			if ( closestDate == matches[fulldate])
+				break;
+		}
+	// ------------------------------------------------------------------ conversion
+		std::setprecision( 15 );
+
+		if ( closestDate[0] != 0)
+		{
+			float	bitcoinValue = _data[closestDate];
+			std::cout
+				<< matches[fulldate]
+				<< " | "
+				<< std::left
+				<< std::setw( 6 )
+				<< value
+				<< " => "
+				<< closestDate
+				<< ", "
+				<< std::setw( 6 )
+				<< bitcoinValue
+				<< " => "
+				<< std::right
+				<< std::setw( 6 )
+				<< value
+				<< " * "
+				<< std::left
+				<< std::setw( 6 )
+				<< bitcoinValue
+				<< " = "
+				<< value * bitcoinValue
+				<< std::endl;
+		}
+		else
+		{
+			std::cout
+				<< C_B_HI_R
+				<< "Error:"
+				<< " Input file: line "
+				<< lineCounter
+				<< ": no matching or earlier date in database."
+				<< C_RST
+				<< std::endl;
+		}
+	}
+	return ( true );
+}
 // ------------------------------------------------------------ static functions
 
 static bool lineMatchesFormat(	std::string	const	&line,
@@ -117,14 +260,23 @@ static bool lineMatchesFormat(	std::string	const	&line,
 	if (!std::regex_match( line, matches, reg) )
 	{
 		std::cout
-			<< C_B_HI_R << "Error:" << fileType << ": line " << lineCounter
-			<< ": bad input: " << line << C_RST << std::endl;
+			<< C_B_HI_R
+			<< "Error: "
+			<< fileType
+			<< ": line "
+			<< lineCounter
+			<< ": bad input: "
+			<< line
+			<< C_RST
+			<< std::endl;
+		return ( false );
 	}
+	return ( true );
 }
 
-static bool	isValidDate(	std::smatch const &matches,
-							std::string const &fileType,
-							size_t lineCounter	)
+static bool	isValidDate(	std::smatch const	&matches,
+							std::string const	&fileType,
+							size_t				lineCounter	)
 {
 	int date_year	= std::stoi( matches[year] );
 	int	date_month	= std::stoi( matches[month] );
@@ -137,22 +289,23 @@ static bool	isValidDate(	std::smatch const &matches,
 		std::cout
 			<< C_B_HI_R 
 			<< "Error:"
-			<< fileType
 			<< " "
+			<< fileType
 			<< ": line "
 			<< lineCounter
 			<< ": date "
 			<< matches[fulldate]
-			<< " is invalid\n"
+			<< " is invalid"
+			<< std::endl
 			<< C_RST;
-		return false;
+		return ( false );
 	}
-	return true;
+	return ( true );
 }
 
 static bool floatValueOverflows(	std::smatch const	&matches,
 									std::string const	&fileType,
-									size_t				lineCounter)
+									size_t				lineCounter	)
 {
 	try
 	{
@@ -170,8 +323,9 @@ static bool floatValueOverflows(	std::smatch const	&matches,
 			<< ": value "
 			<< matches[number]
 			<< C_RST 
-			<< " is invalid.\n";
-		return (true);
+			<< " is invalid"
+			<< std::endl;
+		return ( true );
 	}
-	return (false);
+	return ( false );
 }
