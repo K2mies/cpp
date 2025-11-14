@@ -47,7 +47,7 @@ enum regexMatch	: unsigned int
 // ---------------------------------------------------------------- constructors
 BitcoinExchange::BitcoinExchange(	std::string const	&inputFileName,
 									std::string const	&dataFileName )
-	:	_dataFileName(	dataFileName ),
+	:	_dataFileName(	dataFileName),
 		_inputFileName(	inputFileName ) {}
 // ------------------------------------------------------------ member functions
 
@@ -176,7 +176,7 @@ bool BitcoinExchange::inputParse()
 				<< lineCounter
 				<< ": number "
 				<< matches[number]
-				<< "is not positive"
+				<< " is not positive"
 				<< C_RST
 				<< std::endl;
 			continue;
