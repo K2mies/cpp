@@ -47,7 +47,7 @@ enum regexMatch	: unsigned int
 // ---------------------------------------------------------------- constructors
 BitcoinExchange::BitcoinExchange(	std::string const	&inputFileName,
 									std::string const	&dataFileName )
-	:	_dataFileName(	dataFileName),
+	:	_dataFileName(	dataFileName ),
 		_inputFileName(	inputFileName ) {}
 // ------------------------------------------------------------ member functions
 
@@ -78,8 +78,8 @@ bool BitcoinExchange::dataParse()
 	auto streamStart = dataFile.tellg(); //bookmarks the start position of the file
 	std::string line;
 
-	std::getline(dataFile, line);
-	if ( line.empty() && !dataFile) //check for empty file (a single newline also counts)
+	std::getline( dataFile, line );
+	if ( line.empty() && !dataFile ) //check for empty file (a single newline also counts)
 	{
 		std::cout
 			<< C_B_HI_R
@@ -101,10 +101,13 @@ bool BitcoinExchange::dataParse()
 		//check if first line is header
 		if ( lineCounter == 1 && !std::regex_match( line, matches, reg ) )
 			continue;
+
 		if ( !lineMatchesFormat( line, matches, reg, lineCounter, "Data file" ) )
 			continue;
+
 		if ( !isValidDate( matches, "Data File", lineCounter ) )
 			continue;
+
 		//if it clears all checks then it creats an element/key in the map and asigns the value
 		if ( !floatValueOverflows( matches, "Data File", lineCounter ) )
 			_data[ matches[fulldate] ] = std::stof( matches[number] );
@@ -203,13 +206,13 @@ bool BitcoinExchange::inputParse()
 		{
 			if ( d.first <= matches[fulldate] && d.first > closestDate )
 				closestDate = d.first;
-			if ( closestDate == matches[fulldate])
+			if ( closestDate == matches[fulldate] )
 				break;
 		}
 	// ------------------------------------------------------------------ conversion
 		std::setprecision( 15 );
 
-		if ( closestDate[0] != 0)
+		if ( closestDate[0] != 0 )
 		{
 			float	bitcoinValue = _data[closestDate];
 			std::cout
