@@ -1,17 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   numbervalidation00.cpp                             :+:      :+:    :+:   */
+/*   inputstreamstack00.cpp                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/14 14:12:57 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/11/14 14:31:05 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/11/18 11:43:23 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/11/18 11:43:31 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <regex>
+
+void	print_stack(std::stack<int> stack)
+{
+	std::stack<int> temp_stack = stack;
+	while ( !temp_stack.empty() )
+	{
+		std::cout << temp_stack.top() << std::endl;
+		temp_stack.pop();
+	}
+}
 
 
 int main( int argc, char **argv )
@@ -29,9 +39,11 @@ int main( int argc, char **argv )
 		std::cerr << "Error: could not open input string stream" << std::endl;
 	}
 
-	std::string token;
-	std::regex	numFormat( R"(^[+-]?\d+$)");
+	std::string			token;
+	std::regex			numFormat( R"(^[+-]?\d+$)");
 	std::string const	supportedOperands = "+-/*";
+	std::stack<int>		operands;
+	size_t				operationCount = 0;
 
 	while ( inputStream >> token )
 	{
@@ -42,6 +54,15 @@ int main( int argc, char **argv )
 				<< token
 				<< " is a valid number"
 				<< std::endl;
+			try
+			{
+				operands.push( std::stoi( token ) );
+			}
+			catch( std::exception const &e )
+			{
+				std::cerr << "Error: token overflows int" << std::endl;
+				return (1);
+			}
 		}
 		else if ( token.size() == 1 && std::any_of( supportedOperands.cbegin(), supportedOperands.cend(),
 													[ &x = token[0] ]( auto const &y ) { return x == y; }))
@@ -59,5 +80,6 @@ int main( int argc, char **argv )
 				<< std::endl;
 		}
 	}
+	print_stack(operands);
 	return (0);
 }
