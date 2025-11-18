@@ -102,15 +102,19 @@ bool BitcoinExchange::dataParse()
 		if ( lineCounter == 1 && !std::regex_match( line, matches, reg ) )
 			continue;
 
+		//check if line format is valid
 		if ( !lineMatchesFormat( line, matches, reg, lineCounter, "Data file" ) )
 			continue;
 
+		//check if date is valid
 		if ( !isValidDate( matches, "Data File", lineCounter ) )
 			continue;
 
-		//if it clears all checks then it creats an element/key in the map and asigns the value
+		//check if float value overflows
 		if ( !floatValueOverflows( matches, "Data File", lineCounter ) )
 			_data[ matches[fulldate] ] = std::stof( matches[number] );
+	
+		//^ if it clears all checks then it creats an element/key in the map and asigns the value
 	}
 	return ( true );
 	/* -------------------------------------------------------------------------- */
@@ -156,15 +160,19 @@ bool BitcoinExchange::inputParse()
 	{
 		++lineCounter;
 
+		//check if first line is header
 		if ( lineCounter == 1 && !std::regex_match( line, matches, reg ) )
 			continue;
 
+		//check if line format is valid
 		if ( !lineMatchesFormat( line, matches, reg, lineCounter, "Input file") )
 			continue;
 
+		//check if date is valid
 		if ( !isValidDate( matches, "Input file", lineCounter ) )
 			continue;
-
+		
+		//check if float overflows
 		if ( floatValueOverflows( matches, "Input file", lineCounter ) )
 			continue;
 
@@ -210,7 +218,7 @@ bool BitcoinExchange::inputParse()
 				break;
 		}
 	// ------------------------------------------------------------------ conversion
-		std::setprecision( 15 );
+		std::setprecision( 15 ); // sets precision of floating point presentation to 15 places
 
 		if ( closestDate[0] != 0 )
 		{

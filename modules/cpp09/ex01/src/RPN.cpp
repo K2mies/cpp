@@ -6,7 +6,7 @@
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 11:55:24 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/11/18 13:50:06 by rhvidste         ###   ########.fr       */
+/*   Updated: 2025/11/18 14:02:39 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream>
@@ -33,11 +33,6 @@ int rpn( std::string const &input )
 	{
 		if (std::regex_match (token, numFormat))
 		{
-//			std::cout
-//				<< "number: "
-//				<< token
-//				<< " is a valid number"
-//				<< std::endl;
 			try
 			{
 				operands.push( std::stoi( token ) );
@@ -60,10 +55,6 @@ int rpn( std::string const &input )
 		else if ( token.size() == 1 && std::any_of( supportedOperands.cbegin(), supportedOperands.cend(),
 													[ &x = token[0] ]( auto const &y ) { return x == y; }))
 		{
-//			std::cout
-//				<< token
-//				<< " is a valid operator"
-//				<< std::endl;
 			if ( operands.size() < 2)
 			{
 				std::cerr
@@ -120,7 +111,9 @@ int rpn( std::string const &input )
 		else
 		{
 			std::cout
+				<< "\'"
 				<< token
+				<< "\'"
 				<< " is not a valid token / number or operator (invalid)"
 				<< std::endl;
 			return (1);
