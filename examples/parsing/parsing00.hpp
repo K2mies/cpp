@@ -13,6 +13,63 @@
 #include <vector>
 #include <deque>
 #include <regex>
+#include <unordered_map>
+#include <string>
+
+void	print_unordered_map(std::unordered_map<std::string, int> &map);
+
+template<typename T>
+void swap_values(T &container)
+{
+	for ( int i = 0; i < container.size() - 1; i += 2 )
+	{
+		if ( container[i] > container[i + 1] )
+		{
+			std::swap( container[i], container[i + 1]);
+		}
+	}
+}
+
+template<typename T>
+void	add_lable(T &container, std::unordered_map<std::string, int> &map)
+{
+	//std::unordered_map<std::string, int> map;
+	int	counter = 1;
+	std::string prefix;
+	std::string postfix;
+	std::string key;
+
+	for ( int i = 0; i < container.size(); i++ )
+	{
+	
+		if (i % 2 == 0)
+		{
+			prefix = "a";
+			//postfix = std::to_string( i );
+		}
+		else
+		{
+			prefix = "b";
+			//postfix = std::to_string( i - 1 );
+		}
+		postfix = std::to_string( counter );
+		key = prefix + postfix;
+		map[key] = container[i];
+		counter++;
+	}
+}
+
+
+template<typename T>
+void print_container(T const &container)
+{
+	for ( size_t i = 0; i < container.size(); i++ )
+	{
+		std::cout
+			<< container[i]
+			<< std::endl;
+	}
+}
 
 template<typename T>
 bool check_for_doubles( T const &container )
@@ -31,16 +88,22 @@ bool check_for_doubles( T const &container )
 template<typename T>
 bool parse_numbers( T &container, int argc, char **argv)
 {
-	//this regex expression checks for a vlid floating point
-	std::regex	reg(R"(^[-+]?(\d+\.\d*)[f]?$)");
+	std::regex	reg_a(R"(^[-+]?(\d+\.\d*)[f]?$)"); // checks for valid floating point
+	std::regex	reg_b(R"(\d+([^\d\s])\d+)"); // checks for invalid symbol between two numbers
 
-	for ( int i = 1; i < argc; ++i )
+	for ( int i = 1; i < argc; i++ )
 	{
-
-		if ( std::regex_match( argv[i], reg ) )
+		if ( std::regex_match( argv[i], reg_a ) )
 		{
 			std::cerr
-				<< "Error: numbers must be positive integers only"
+				<< "Error: numbers must be positive integers only (floating point numbers not allowed)"
+				<< std::endl;
+			return ( false );
+		}
+		if ( std::regex_match( argv[i], reg_b ) )
+		{
+			std::cerr
+				<< "Error: invalid symbols"
 				<< std::endl;
 			return ( false );
 		}
@@ -71,15 +134,4 @@ bool parse_numbers( T &container, int argc, char **argv)
 		return ( false ); 
 	}
 	return ( true );
-}
-
-template<typename T>
-void print_container(T const &container)
-{
-	for ( size_t i = 0; i < container.size(); i++ )
-	{
-		std::cout
-			<< container[i]
-			<< std::endl;
-	}
 }
