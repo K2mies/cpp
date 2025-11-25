@@ -17,45 +17,66 @@
 #include <string>
 
 void	print_unordered_map(std::unordered_map<std::string, int> &map);
-
-template<typename T>
-void swap_values(T &container)
-{
-	for ( int i = 0; i < container.size() - 1; i += 2 )
-	{
-		if ( container[i] > container[i + 1] )
-		{
-			std::swap( container[i], container[i + 1]);
-		}
-	}
-}
+//void	print_unordered_map(std::unordered_map<std::string, int> &map);
+//
+//template<typename T>
+//void swap_values(T &container)
+//{
+//	for ( int i = 0; i < container.size() - 1; i += 2 )
+//	{
+//		if ( container[i] > container[i + 1] )
+//		{
+//			std::swap( container[i], container[i + 1]);
+//		}
+//	}
+//}
 
 template<typename T>
 void	add_lable(T &container, std::unordered_map<std::string, int> &map)
 {
 	//std::unordered_map<std::string, int> map;
-	int	counter = 1;
+	//int	counter = 1;
 	std::string prefix;
 	std::string postfix;
 	std::string key;
 
 	for ( int i = 0; i < container.size(); i++ )
 	{
+		int counter = (i / 2) + 1;
 	
 		if (i % 2 == 0)
 		{
-			prefix = "a";
+			prefix = "b";
 			//postfix = std::to_string( i );
 		}
 		else
 		{
-			prefix = "b";
+			prefix = "a";
 			//postfix = std::to_string( i - 1 );
 		}
 		postfix = std::to_string( counter );
 		key = prefix + postfix;
 		map[key] = container[i];
-		counter++;
+		//counter++;
+	}
+}
+
+template<typename T>
+void add_pairs(T const &container)
+{
+	std::vector<std::vector> pairs;
+	for ( int i = 0; i < container.size(); i++ )
+	{
+		std::vector pair;
+		if ( i % 2 != 0 )
+		{
+			pair.push_back( container[i] );
+		}
+		else
+		{
+			pair.push_back( container[i] );
+		}
+		pairs.push_back( pair );
 	}
 }
 
@@ -135,3 +156,16 @@ bool parse_numbers( T &container, int argc, char **argv)
 	}
 	return ( true );
 }
+
+template<typename T>
+void	swap_values(T &container)
+{
+	for ( size_t i = 0; i < container.size() - 1; i += 2 )
+	{
+		if ( container[i] > container[i + 1])
+		{
+			std::swap( container[i], container[i + 1] );
+		}
+	}
+}
+
