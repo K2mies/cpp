@@ -16,20 +16,8 @@
 #include <unordered_map>
 #include <string>
 
+void	print_pairs(std::vector<std::vector<int>> &pairs);
 void	print_unordered_map(std::unordered_map<std::string, int> &map);
-//void	print_unordered_map(std::unordered_map<std::string, int> &map);
-//
-//template<typename T>
-//void swap_values(T &container)
-//{
-//	for ( int i = 0; i < container.size() - 1; i += 2 )
-//	{
-//		if ( container[i] > container[i + 1] )
-//		{
-//			std::swap( container[i], container[i + 1]);
-//		}
-//	}
-//}
 
 template<typename T>
 void	add_lable(T &container, std::unordered_map<std::string, int> &map)
@@ -61,25 +49,54 @@ void	add_lable(T &container, std::unordered_map<std::string, int> &map)
 	}
 }
 
-template<typename T>
-void add_pairs(T const &container)
+//template<typename T>
+//void add_pairs(T const &container, std::vector<std::vector<int>> &pairs)
+//{
+//	size_t size = container.size();
+//	//std::vector<std::vector<int>> pairs;
+//	for ( int i = 0; i < container.size() - 1; i += 2 )
+//	{
+//		// create a complete two-element pair
+//		std::vector<int> pair;
+//		pair.push_back( container[i] );
+//		pair.push_back( container[i + 1] );
+//
+//		pairs.push_back( pair );
+//	}
+//	if ( size % 2 != 0 )
+//	{
+//		size_t last_index = size - 1;
+//		std::vector<int> final_pair;
+//		final_pair.push_back( container[last_index] );
+//		pairs.push_back( final_pair );
+//	}
+//
+//}
+template<typename T, typename outer_container>
+void add_pairs(T const &container, outer_container &pairs)
 {
-	std::vector<std::vector> pairs;
-	for ( int i = 0; i < container.size(); i++ )
+	size_t size = container.size();
+	//std::vector<std::vector<int>> pairs;
+	for ( int i = 0; i < container.size() - 1; i += 2 )
 	{
-		std::vector pair;
-		if ( i % 2 != 0 )
-		{
-			pair.push_back( container[i] );
-		}
-		else
-		{
-			pair.push_back( container[i] );
-		}
+		// create a complete two-element pair
+		//std::vector<int> pair;
+		outer_container pair;
+		pair.push_back( container[i] );
+		pair.push_back( container[i + 1] );
+
 		pairs.push_back( pair );
 	}
-}
+	if ( size % 2 != 0 )
+	{
+		size_t last_index = size - 1;
+		//std::vector<int> final_pair;
+		outer_container final_pair;
+		final_pair.push_back( container[last_index] );
+		pairs.push_back( final_pair );
+	}
 
+}
 
 template<typename T>
 void print_container(T const &container)

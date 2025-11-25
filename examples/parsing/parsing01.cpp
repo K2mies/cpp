@@ -30,6 +30,9 @@ int main(int argc, char **argv)
 		swap_values( numbers );
 		std::cout << "Vector after swap: \n";
 		print_container( numbers );
+		std::vector<std::vector<int>> pairs;
+		add_pairs( numbers, pairs );
+		print_pairs( pairs );
 //		std::unordered_map<std::string, int > map;
 //		add_lable(numbers, map);
 //		print_unordered_map(map);
@@ -48,6 +51,19 @@ int main(int argc, char **argv)
 	}
 
 	return ( 0 );
+}
+
+void	print_pairs(std::vector<std::vector<int>> &pairs)
+{
+	std::cout << "pairs: " << std::endl;
+	for (const auto &pair : pairs)
+	{
+		for (int element : pair)
+		{
+			std::cout << element << " ,";
+		}
+		std::cout << std::endl;
+	}
 }
 
 void	print_unordered_map(std::unordered_map<std::string, int> &map)
