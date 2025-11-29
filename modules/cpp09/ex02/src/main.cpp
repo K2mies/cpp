@@ -11,14 +11,12 @@
 /* ************************************************************************** */
 #include "PmergeMe.hpp"
 
-int main( int argc, char **argv )
-{
-	if ( argc < 2 )
-	{
-		std::cout << "Usage: ./PmergeMe <list of positive integers\n>";
-		return ( 1 );
-	}
-	PmergeMe pmerge;
-	pmerge.run(argc, argv);
-	return ( 0 ); 
+int main(int argc, char **argv) {
+  if (argc < 2) {
+    std::cout << "Usage: ./PmergeMe <list of positive integers\n>";
+    return (1);
+  }
+  PmergeMe pmerge;
+  pmerge.run(argc, argv);
+  return (0);
 }
