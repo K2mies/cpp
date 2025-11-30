@@ -18,8 +18,8 @@
 
 class PmergeMe {
 private:
-  std::vector<int> parsed_vec_;
-  std::deque<int> parsed_deq_;
+  std::vector<int> _vec;
+  std::deque<int> _deq;
 
 public:
   PmergeMe() = default;
