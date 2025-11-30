@@ -12,10 +12,10 @@
 #include "PmergeMe.hpp"
 
 // --------------------------------------------------------------------- parsing
+
 /*
  * @brief main funcion to run program
  */
-
 bool PmergeMe::run(int argc, char **argv) {
   if (!parse(argc, argv)) {
     return (false);
@@ -43,6 +43,10 @@ bool PmergeMe::parse(int argc, char **argv) {
 }
 
 // ------------------------------------------------------------- vector
+
+/*
+ * @brief recursive function to sort vector into n pairs of n pairs
+ */
 void PmergeMe::sortVec(std::vector<int> &vec, size_t scale) {
   size_t size = vec.size();
   size_t unitSize = size / scale;
