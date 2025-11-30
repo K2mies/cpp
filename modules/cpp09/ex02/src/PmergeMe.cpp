@@ -21,10 +21,6 @@ bool PmergeMe::run(int argc, char **argv) {
     return (false);
   }
   sortVec(_vec, 1);
-  // recursivelySwapVec(_vec, 1);
-  //	std::cout << "Vector after swaps\n"
-  //	print_container(_vec);
-
   return (true);
 }
 
