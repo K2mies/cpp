@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "PmergeMe.hpp"
+#include "ansi_colors.hpp"
 
 // --------------------------------------------------------------------- parsing
 
@@ -20,7 +21,7 @@ bool PmergeMe::run(int argc, char **argv) {
   if (!parse(argc, argv)) {
     return (false);
   }
-  sortVec(_vec, 1);
+  sortVec(1);
   return (true);
 }
 
@@ -47,31 +48,77 @@ bool PmergeMe::parse(int argc, char **argv) {
 /*
  * @brief recursive function to sort vector into n pairs of n pairs
  */
-void PmergeMe::sortVec(std::vector<int> &vec, size_t scale) {
-  size_t size = vec.size();
+void PmergeMe::sortVec(size_t scale) {
+  size_t size = _vec.size();
   size_t unitSize = size / scale;
   static int recursion_level = 0;
-
-  recursion_level++;
-  std::cout << "recursion level: " << recursion_level << std::endl;
 
   if (unitSize < 2)
     return;
 
+  recursion_level++;
+  std::cout << "recursion level: " << recursion_level << std::endl;
+  std::cout << "scale: " << scale << std::endl;
+
   // Comparing the pairs to each other
   for (size_t i = 0; i + (scale * 2) <= size; i += (scale * 2)) {
-    int a1 = vec[i + scale - 1];
-    int b1 = vec[i + (scale * 2) - 1];
+    int a1 = _vec[i + scale - 1];
+    int b1 = _vec[i + (scale * 2) - 1];
 
     // if b1 is smaller than a1, we swap pairs
     if (b1 < a1) {
       for (size_t j = 0; j < scale; j++)
-        std::swap(vec[i + j], vec[i + scale + j]);
+        std::swap(_vec[i + j], _vec[i + scale + j]);
     }
   }
   // for debugging
-  for (const auto &s : vec)
-    std::cout << s << " ";
+  print_container(_vec);
   std::cout << std::endl;
-  sortVec(vec, scale * 2);
+  sortVec(scale * 2);
+  insertVec(scale);
+  std::cout << "test print" << std::endl;
+}
+
+void PmergeMe::insertVec(size_t scale)
+{
+  size_t size = _vec.size();
+
+  std::vector<int> main;
+  std::vector<int> pend;
+
+  main.reserve(size);
+  pend.reserve(size);
+
+  // Inserting b1 to the main
+  main.insert(main.end(), _vec.begin(), _vec.begin() + scale);
+  // Inserting a1 to the main
+  main.insert(main.end(), _vec.begin() + scale, _vec.begin() + (scale * 2));
+
+  //inserting all the rest of the a's to main
+  for (size_t i = (scale * 3); i + scale <= size; i += (scale * 2))
+  {
+       for (size_t j = 0; j < scale; j++)
+            main.push_back(_vec[j + i]);
+  }
+
+  //inserting all the rest of the b's to main
+  for (size_t k = (scale * 2); k + scale <= size; k += (scale * 2))
+  {
+       for (size_t j = 0; j < scale; j++)
+            pend.push_back(_vec[j + k]);
+  }
+
+
+  static int recursion_level = 0;
+  recursion_level++;
+
+  std::cout << "insert recursion level: " << recursion_level << std::endl;
+  std::cout << "insert scale: " << scale << std::endl;
+
+  std::cout<< "source: ";
+  print_container(_vec);
+  std::cout << "main: ";
+  print_container(main);
+  std::cout << "pend: ";
+  print_container(pend);
 }

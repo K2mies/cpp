@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ansi_colors.hpp"
 #include <deque>
 #include <iostream>
 #include <regex>
@@ -31,11 +32,12 @@ public:
   // parsing
   bool parse(int argc, char **argv);
   bool run(int argc, char **argv);
-  // void recursivelySwapVec(std::vector<int> &vec, size_t scale);
-  void sortVec(std::vector<int> &vec, size_t scale);
+  void sortVec(size_t scale);
+  void insertVec(size_t scale);
 };
 
 // ---------------------------------------------------------- template functions
+// --------------------------------------------------------------------- 
 // --------------------------------------------------------------------- parsing
 
 /*
@@ -93,6 +95,7 @@ static bool parse_numbers(T &container, int argc, char **argv) {
 // ----------------------------------------------------------------------- print
 template <typename T> void print_container(T const &container) {
   for (size_t i = 0; i < container.size(); i++) {
-    std::cout << container[i] << std::endl;
+    std::cout << "(" << container[i] << "), ";
   }
+  std::cout << std::endl;
 }
