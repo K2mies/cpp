@@ -13,7 +13,7 @@
 NAME		:=	PmergeMe
 CC			:=	c++
 FLAGS		:=	-Wall -Werror -Wextra -std=c++20
-DEBUG_FLAGS	:=	-g
+DEBUG_FLAGS	:=	-DDEBUG -g
 # ---------------------------------------------------------------------------- #
 INC_DIR		:=	./inc
 HEADERS		:=	$(INC_DIR)/PmergeMe.hpp			\
@@ -56,5 +56,8 @@ fclean: clean
 
 re: fclean all
 # ---------------------------------------------------------------------------- #
-.PHONY: all clean fclean re
+debug: FLAGS += $(DEBUG_FLAGS)
+debug: fclean all
+# ---------------------------------------------------------------------------- #
+.PHONY: all clean fclean re debug
 # ---------------------------------------------------------------------------- #

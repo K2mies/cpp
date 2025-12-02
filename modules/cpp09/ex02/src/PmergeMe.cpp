@@ -76,7 +76,6 @@ void PmergeMe::sortVec(size_t scale) {
   std::cout << std::endl;
   sortVec(scale * 2);
   insertVec(scale);
-  std::cout << "test print" << std::endl;
 }
 
 void PmergeMe::insertVec(size_t scale)
@@ -108,6 +107,11 @@ void PmergeMe::insertVec(size_t scale)
             pend.push_back(_vec[j + k]);
   }
 
+  size_t mainElements = main.size();
+  size_t pendElements = pend.size();
+
+  // checking if there are any leftovers that could not be formed into pairs
+  std::vector<size_t> leftOvers = checkForLeftOvers<std::vector<size_t>>(_vec, mainElements, pendElements);
 
   static int recursion_level = 0;
   recursion_level++;
@@ -121,4 +125,7 @@ void PmergeMe::insertVec(size_t scale)
   print_container(main);
   std::cout << "pend: ";
   print_container(pend);
+  std::cout << "left over: ";
+  print_container(leftOvers);
+  std::cout << std::endl;
 }

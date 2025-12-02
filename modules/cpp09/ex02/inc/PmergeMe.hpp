@@ -29,7 +29,6 @@ public:
 
   PmergeMe &operator=(PmergeMe const &);
   // ---------------------------------------------------------------------
-  // parsing
   bool parse(int argc, char **argv);
   bool run(int argc, char **argv);
   void sortVec(size_t scale);
@@ -37,7 +36,6 @@ public:
 };
 
 // ---------------------------------------------------------- template functions
-// --------------------------------------------------------------------- 
 // --------------------------------------------------------------------- parsing
 
 /*
@@ -98,4 +96,60 @@ template <typename T> void print_container(T const &container) {
     std::cout << "(" << container[i] << "), ";
   }
   std::cout << std::endl;
+}
+
+// ------------------------------------------------------------------- insertion
+template<typename Container, typename ContainerType>
+Container checkForLeftOvers(ContainerType &source,
+                                  size_t mainSize,
+                                  size_t pendSize)
+{
+  Container leftOvers;
+  size_t  size = source.size();
+  size_t remainingElements = size - mainSize - pendSize;
+
+  // If there were leftovers, we add them into the lefovers vector
+  if (remainingElements > 0)
+  {
+    size_t leftOverStart = size - remainingElements;
+    for(size_t i = leftOverStart; i < size; i++)
+      leftOvers.push_back(source[i]);
+  }
+  return(leftOvers);
+}
+
+// ------------------------------------------------------------------ Jacobsthal
+template<typename Container>
+Container findJacobsthalOrder(size_t pendsize)
+{
+  Container jacobOrder;
+  if (pendsize == 0)
+    return (jacobOrder);
+
+  size_t j0 = 0; // Jacob -2 (j(0))
+  size_t j1 = 1; // Jacob -1 (j(1))
+  size_t prevJacob = 0;
+
+  while(prevJacob < pendsize)
+  {
+    size_t currJacob = j1;
+
+    if (currJacob == 1)
+    {
+      size_t nextJacob = j1 + (2 * j0);
+      j0 = j1;
+      j1 = nextJacob;
+      continue;
+    }
+    size_t topJacob = currJacob;
+    if (currJacob > pendsize)
+      topJacob = pendsize;
+    for(size_t i = topJacob; i > prevJacob; i--)
+      jacobOrder.push_back(i);
+    prevJacob = currJacob;
+    size_t nextJacob = j1 + (2 * j0);
+    j0 = j1;
+    j1 = nextJacob;
+  }
+  return(jacobOrder);
 }
