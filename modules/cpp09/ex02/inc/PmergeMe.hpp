@@ -28,14 +28,15 @@ public:
   ~PmergeMe() = default;
 
   PmergeMe &operator=(PmergeMe const &);
-  // ---------------------------------------------------------------------
+
   bool parse(int argc, char **argv);
   bool run(int argc, char **argv);
   void sortVec(size_t scale);
   void insertVec(size_t scale);
 };
 
-// ---------------------------------------------------------- template functions
+/* --------------------------- template functions ----------------------------*/
+
 // --------------------------------------------------------------------- parsing
 
 /*
@@ -116,6 +117,32 @@ Container checkForLeftOvers(ContainerType &source,
       leftOvers.push_back(source[i]);
   }
   return(leftOvers);
+}
+
+template<typename Container>
+size_t binarySearch(Container &main, int num, size_t blockSize)
+{
+  int midBlock;
+  int mid;
+  int numOfBlocks = main.size() / blockSize;
+  int low = 1;
+  int high = numOfBlocks;
+
+  while(low <= high)
+  {
+    midBlock = low + (high - low) / 2;
+    mid = (midBlock * blockSize) - 1;
+
+    if(main[mid] == num)
+      return(mid);
+    if(main[mid] < num)
+      low = midBlock + 1;
+    else
+      high = midBlock - 1;
+  }
+  if(main[mid] < num)
+    return(mid + 1);
+  return(mid - blockSize + 1);
 }
 
 // ------------------------------------------------------------------ Jacobsthal

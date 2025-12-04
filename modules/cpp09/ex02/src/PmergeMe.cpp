@@ -18,10 +18,13 @@
  * @brief main funcion to run program
  */
 bool PmergeMe::run(int argc, char **argv) {
+  std::cout << "argv = " << argv[1] << std::endl;
   if (!parse(argc, argv)) {
     return (false);
   }
   sortVec(1);
+  std::cout << "final output: ";
+  print_container(_vec);
   return (true);
 }
 
@@ -93,6 +96,9 @@ void PmergeMe::insertVec(size_t scale)
   // Inserting a1 to the main
   main.insert(main.end(), _vec.begin() + scale, _vec.begin() + (scale * 2));
 
+  std::cout << "b1 and a1 main insertion: ";
+  print_container(main);
+
   //inserting all the rest of the a's to main
   for (size_t i = (scale * 3); i + scale <= size; i += (scale * 2))
   {
@@ -104,7 +110,9 @@ void PmergeMe::insertVec(size_t scale)
   for (size_t k = (scale * 2); k + scale <= size; k += (scale * 2))
   {
        for (size_t j = 0; j < scale; j++)
+      {
             pend.push_back(_vec[j + k]);
+      }
   }
 
   size_t mainElements = main.size();
@@ -112,6 +120,32 @@ void PmergeMe::insertVec(size_t scale)
 
   // checking if there are any leftovers that could not be formed into pairs
   std::vector<size_t> leftOvers = checkForLeftOvers<std::vector<size_t>>(_vec, mainElements, pendElements);
+
+  if(pendElements != 0)
+  {
+    size_t pendBlockSize = pendElements / scale;
+    std::vector<size_t> jacobOrder = findJacobsthalOrder<std::vector<size_t>>(pendBlockSize);
+
+    std::vector<int> temp;
+    size_t blockSize = scale;
+
+    for(size_t index : jacobOrder)
+    {
+      size_t start = (index - 1) * blockSize;
+      if(start >= pendElements)
+        continue;
+
+      size_t end = start + blockSize;
+      if(end > pendElements)
+        end = pendElements;
+
+      size_t mainIndex = binarySearch(main, pend[end - 1], blockSize);
+      main.insert(main.begin() + mainIndex, pend.begin() + start, pend.begin() + end);
+    }
+  }
+  if(leftOvers.size() != 0)
+    main.insert(main.end(), leftOvers.begin(), leftOvers.end());
+  _vec = main;
 
   static int recursion_level = 0;
   recursion_level++;
