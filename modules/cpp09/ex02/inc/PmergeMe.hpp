@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "ansi_colors.hpp"
+#include <vector>
 #include <deque>
 #include <iostream>
 #include <regex>
 #include <string>
-#include <vector>
+#include <chrono>
 
 class PmergeMe {
 private:
@@ -29,10 +30,18 @@ public:
 
   PmergeMe &operator=(PmergeMe const &);
 
+  const std::vector<int>  &getVector();
+  const std::deque<int>   &getDeque();
+
+  size_t  getVecSize();
+  size_t  getDeqSize();
+
   bool parse(int argc, char **argv);
   bool run(int argc, char **argv);
   void sortVec(size_t scale);
   void insertVec(size_t scale);
+  void sortDeq(size_t scale);
+  void insertDeq(size_t scale);
 };
 
 /* --------------------------- template functions ----------------------------*/
