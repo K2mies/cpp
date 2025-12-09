@@ -19,7 +19,10 @@ int main(int argc, char **argv) {
   PmergeMe pmerge;
   try
   {
-    pmerge.parse( argc, argv );
+    if (!pmerge.parse( argc, argv ))
+    {
+      return (1);
+    }
     std::cout << "Before: ";
     print_container( pmerge.getVector() );
     auto timeStartVec = std::chrono::high_resolution_clock::now();
